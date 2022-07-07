@@ -4,7 +4,7 @@ import { ClickAwayListener, MenuItem, Popper, Typography } from '@mui/material';
 import styles from './MoreIconDropDown.module.scss'
 const MoreIconDropDown = (props) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { id } = props;
+    const { id, onClick} = props;
     const handleClick = event => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     };
@@ -26,7 +26,9 @@ const MoreIconDropDown = (props) => {
                         <MenuItem>
                             <Typography>Edit</Typography>
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem
+                            onClick={onClick}
+                        >
                             <Typography>Remove</Typography>
                         </MenuItem>
                     </div>

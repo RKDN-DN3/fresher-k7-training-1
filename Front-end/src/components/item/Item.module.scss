@@ -1,42 +1,50 @@
 .item {
-    justify-content: space-between;
-    margin: 10px 0;
-    background-color: rgba(255 255 255 / 0.3);
-    border: 1px solid rgba(255 255 255 / 0.5);
-    border-radius: 15px;
-    padding: 10px 24px;
-    color: var(--color-white);
-    display: flex;
-    &:hover {
-        border-color: #ffd337;
-    }
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  justify-content: space-between;
+  margin: 10px 0;
+  background-color: rgba(255 255 255 / 0.3);
+  border: 1px solid rgba(255 255 255 / 0.5);
+  border-radius: 15px;
+  padding: 10px 24px;
+  color: var(--color-white);
+  display: flex;
+  &:hover {
+    border-color: #ffd337;
+  }
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .title {
-    font-weight: 500;
-    font-size: 18px;
-    color: #333;
+  font-weight: 500;
+  font-size: 18px;
+  color: #333;
 }
 .content {
-    font-weight: 500;
-    color: #c3b5cd;
-    padding: 10px 0;
+  font-weight: 500;
+  color: #c3b5cd;
+  padding: 10px 0;
 }
 .right {
-    display: flex;
-    align-items: center;
-    svg {
-        cursor: pointer;
-    }
+  display: flex;
+  align-items: center;
+  svg {
+    cursor: pointer;
+  }
+}
+.left {
+  display: flex; 
+  flex-direction: column;
+  gap: 5px;
 }
 .actions {
-    display: flex;
-    gap: 10px;
-    :global(.MuiButton-root) {
-        height: 30px;
-        text-transform: capitalize;
-    }
+  display: flex;
+  gap: 10px;
+  :global(.MuiButton-root) {
+    height: 30px;
+    text-transform: capitalize;
+  }
 }
 .btnDone {
-    background-color: #3ba1ff !important;
+  background-color: #3ba1ff !important;
+}
+.time {
+  color: #333;
 }

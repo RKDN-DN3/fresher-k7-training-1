@@ -1,24 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  username: "Guest"
+  data: [
+    {
+      title: 'Javascript',
+      des: 'To day learning Javascript',
+      endTime: '22/2/2022'
+    }
+  ]
 };
 
 export const reduxSlice = createSlice({
-  name: "todo", 
+  name: "todo",
   initialState,
   reducers: {
-    updateUsername: (state, action) => {
-      state.username = action.payload;
+    updateData: (state, action) => {
+      const object = action.payload
+      state.data.push(object)
     }
   }
 });
 
-export const { updateUsername } = reduxSlice.actions;
+export const { updateData } = reduxSlice.actions;
 
 
 export const selectDataRedux = state => {
-  return state.todo.username;
+  return state.todo.data;
 }
 
 export default reduxSlice.reducer;
