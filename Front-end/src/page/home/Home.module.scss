@@ -1,0 +1,29 @@
+.container {
+  // background-color: #ccc;
+  height: 1000px;
+}
+.header {
+  h4 {
+    color: var(--color-white);
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btnHeader {
+  background-color: #ff7179 !important;
+  border-radius: 10px !important; 
+  width: 120px !important;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  svg {
+    color: var(--color-white);
+    cursor: pointer;
+  }
+}
+.content {
+  margin-top: 24px;
+}
