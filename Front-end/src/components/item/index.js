@@ -3,7 +3,8 @@ import styles from './Item.module.scss'
 import MoreIconDropDown from '../moreIconDropDown';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux'
-import { deleteItem, updateData } from '../../store/todoSlice'
+import { deleteItem, updateData, checkItem, removeTask } from '../../store/todoSlice';
+import CheckIcon from '@mui/icons-material/Check';
 import Dialog from '../dialog'
 
 const Item = (props) => {
@@ -23,7 +24,11 @@ const Item = (props) => {
   }
 
   const setDataForm = (data) => {
-    dispatch(updateData({data, type: 'edit'}))
+    dispatch(updateData({ data, type: 'edit' }))
+  }
+
+  const handleCheckItem = () => {
+    dispatch(checkItem(item))
   }
 
   return (
@@ -35,12 +40,18 @@ const Item = (props) => {
         <div className={styles.actions}>
           <Button
             variant='contained'
-            className={styles.btnDone}
-          >Done</Button>
-          <Button
-            variant='contained'
-            className={styles.btnStatus}
-          >Hight</Button>
+            className={item.status === 1 ? styles.btnCheck : styles.btnDone}
+            onClick={handleCheckItem}
+          >
+            {item.status === 1 ? <CheckIcon /> : 'Done'}
+          </Button>
+          {item.status === 1 &&
+            <Button
+              variant='contained'
+              className={styles.btnRemove}
+              onClick={() => dispatch(removeTask(item))}
+            >Remove</Button>
+          }
         </div>
       </div>
       <div className={styles.right}>

@@ -8,16 +8,12 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
 
     const [valueInput, setValueInput] = React.useState('')
 
-    React.useEffect(() => {
-        setListTodoSearch(listTodo)
-    }, [listTodo])
-
     const handleChange = (e) => {
         if (e.target.value) {
             setValueInput(e.target.value)
             let matchingStrings = [];
             listTodo.forEach((list) => {
-                if (list.title.toLocaleLowerCase().search(valueInput.toLocaleLowerCase()) > -1) {
+                if (`${list.title}${list.des}}${list.endTime}`.toLocaleLowerCase().search(valueInput.toLocaleLowerCase()) > -1) {
                     matchingStrings.push(list)
                 }
             })
@@ -27,12 +23,25 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
         }
     }
 
+    const setSelected = (e) => {
+        if (e.target.value === 3) {
+            setListTodoSearch(listTodo)
+            console.log(listTodo)
+        } else {
+            let copyArr = [...listTodo]
+            copyArr = listTodo.filter((item) => item.status === e.target.value);
+            setListTodoSearch(copyArr)
+            console.log(copyArr)
+        }
+    }
 
     return (
         <div className={styles.container}>
             <div className={styles.optionFilter}>
                 <FilterAltIcon />
-                <Select />
+                <Select
+                    setSelected={setSelected}
+                />
             </div>
             <div className={styles.search}>
                 <TextField

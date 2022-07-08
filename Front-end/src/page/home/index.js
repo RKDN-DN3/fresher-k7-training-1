@@ -9,12 +9,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateData } from "../../store/todoSlice";
 
 const Home = () => {
-  
+
   const [open, setOpen] = React.useState(false);
   const [listTodo, setListTodo] = React.useState([]);
   const [listTodoSearch, setListTodoSearch] = React.useState([]);
   const dataTodo = useSelector((state) => state.todo.data)
   const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    setListTodoSearch([...dataTodo].reverse())
+  }, [dataTodo]);
 
   React.useEffect(() => {
     setListTodo([...dataTodo].reverse())

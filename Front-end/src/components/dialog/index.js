@@ -10,6 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import moment from 'moment';
+import CloseIcon from '@mui/icons-material/Close';
 import styles from './DialogModal.module.scss'
 export default function DialogModal(props) {
     const { open, setOpen, setDataForm, item } = props;
@@ -38,10 +39,11 @@ export default function DialogModal(props) {
                 endTime: timeFormat !== "Invalid date" ? timeFormat : "",
                 timeNoneFormat: JSON.stringify(endTime),
                 title,
-                des
+                des,
+                status: 0
             }
             if (item && item.id) {
-                setDataForm({...object, id: item.id})
+                setDataForm({ ...object, id: item.id })
             } else {
                 setDataForm(object)
             }
@@ -53,12 +55,11 @@ export default function DialogModal(props) {
         <Dialog
             open={open}
             onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             className={styles.Dialog}
         >
-            <DialogTitle id="alert-dialog-title">
-                Make a todo for the new day
+            <DialogTitle className={styles.DialogTitle}>
+                <span>Make a todo for the new day</span>
+                <CloseIcon onClick={handleClose} />
             </DialogTitle>
             <DialogContent className={styles.form}>
                 <div className={styles.formInput}>
@@ -85,7 +86,7 @@ export default function DialogModal(props) {
                     <span>End Time</span>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
-                            label="Basic example"
+                            label="Time"
                             value={endTime}
                             onChange={(newValue) => {
                                 setEndTime(newValue);
@@ -95,10 +96,18 @@ export default function DialogModal(props) {
                     </LocalizationProvider>
                 </div>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleClose}>Disagree</Button>
-                <Button onClick={handleSubmit}>
-                    Agree
+            <DialogActions className={styles.DialogActions}>
+                <Button
+                    onClick={handleClose}
+                    variant="outlined"
+                >
+                    Cancel
+                </Button>
+                <Button
+                    onClick={handleSubmit}
+                    variant="contained"
+                >
+                    Submit
                 </Button>
             </DialogActions>
         </Dialog>
