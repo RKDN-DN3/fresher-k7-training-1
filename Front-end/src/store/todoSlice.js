@@ -38,6 +38,7 @@ export const reduxSlice = createSlice({
       } else {
         const object = action.payload
         object.id = Math.random()
+        object.status = 0
         state.data.push(object)
       }
 
@@ -48,7 +49,11 @@ export const reduxSlice = createSlice({
     checkItem: (state, action) => {
       state.data.forEach((item) => {
         if (item.id === action.payload.id) {
-          item.status = 1
+          if( item.status === 1) {
+            item.status = 0 
+          } else {
+            item.status = 1
+          }
         }
       })
     },
