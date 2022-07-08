@@ -2,12 +2,27 @@ import React from 'react'
 import styles from './Item.module.scss'
 import MoreIconDropDown from '../moreIconDropDown';
 import { Button } from '@mui/material';
+import { useDispatch } from 'react-redux'
+import { deleteItem } from '../../store/todoSlice'
+import Dialog from '../dialog'
+
 const Item = (props) => {
+
+  const [ openDialog, setOpenDialog] = React.useState(false);
+
+  const dispatch = useDispatch();
+
   const { item } = props;
 
-  const handleDeleteItem = (item) => {
-    
+  const handleDeleteItem = () => {
+    dispatch(deleteItem(item))
   }
+
+  const handleEditItem = () => {
+    console.log(item)
+    setOpenDialog(true)
+  }
+
   return (
     <div className={styles.item}>
       <div className={styles.left}>
@@ -26,10 +41,14 @@ const Item = (props) => {
         </div>
       </div>
       <div className={styles.right}>
-        <MoreIconDropDown 
+        <MoreIconDropDown
           onClick={handleDeleteItem}
+          onClickEdit={handleEditItem}
         />
       </div>
+      <Dialog
+        open={openDialog}
+      /> 
     </div>
   )
 }

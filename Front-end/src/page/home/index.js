@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import styles from './Home.module.scss';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Filter from "../../components/filter/Filter";
@@ -12,10 +12,6 @@ const Home = () => {
   const dataTodo = useSelector((state) => state.todo.data)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log(dataTodo)
-  }, [dataTodo]);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -23,6 +19,7 @@ const Home = () => {
   const setDataForm = (data) => {
     dispatch(updateData(data))
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
