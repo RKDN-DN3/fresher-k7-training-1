@@ -2,10 +2,11 @@ import React from 'react'
 import { InputAdornment, TextField as TextFieldInput } from '@mui/material'
 import styles from './TextField.module.scss'
 import SearchIcon from '@mui/icons-material/Search';
-const TextField = () => {
+const TextField = ({ onChange }) => {
   return (
     <div className={styles.TextField}>
       <TextFieldInput
+        onChange={onChange}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

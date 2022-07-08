@@ -4,15 +4,38 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import styles from './Filter.module.scss'
 import Select from '../select'
 
-const Filter = () => {
+const Filter = ({ listTodo, setListTodoSearch }) => {
+
+    const [valueInput, setValueInput] = React.useState('')
+
+    const handleChange = (e) => {
+        if (e.target.value) {
+            setValueInput(e.target.value)
+            let matchingStrings = [];
+            listTodo.forEach((list) => {
+                if (list.title.toLocaleLowerCase().search(valueInput.toLocaleLowerCase()) > -1) {
+                    matchingStrings.push(list)
+                }
+            })
+            setListTodoSearch(matchingStrings)
+        } else {
+            setListTodoSearch(null)
+        }
+    }
+
+
     return (
         <div className={styles.container}>
             <div className={styles.optionFilter}>
                 <FilterAltIcon />
-                <Select/>
+                <Select />
             </div>
             <div className={styles.search}>
-                <TextField  variant="outlined"/>
+                <TextField
+                    variant="outlined"
+                    value={valueInput}
+                    onChange={handleChange}
+                />
             </div>
         </div>
     )

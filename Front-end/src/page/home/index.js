@@ -5,17 +5,24 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Filter from "../../components/filter/Filter";
 import Item from "../../components/item";
 import DialogModal from "../../components/dialog";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { updateData } from "../../store/todoSlice";
+
 const Home = () => {
   const [open, setOpen] = React.useState(false);
   const [listTodo, setListTodo] = React.useState([]);
+  const [listTodoSearch, setListTodoSearch] = React.useState([]);
   const dataTodo = useSelector((state) => state.todo.data)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    setListTodo([...dataTodo].reverse())
-  }, [dataTodo]);
+    const arrTodo = [...dataTodo].reverse()
+    if (listTodoSearch && listTodoSearch.length > 0) {
+      setListTodo(listTodoSearch)
+    } else {
+      setListTodo(arrTodo)
+    }
+  }, [dataTodo, listTodoSearch]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,7 +31,7 @@ const Home = () => {
   const setDataForm = (data) => {
     dispatch(updateData(data))
   }
-
+  console.log('r-render')
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -41,7 +48,10 @@ const Home = () => {
         </div>
       </div>
       <div className={styles.filter}>
-        <Filter />
+        <Filter
+          listTodo={listTodo && listTodo}
+          setListTodoSearch={setListTodoSearch}
+        />
       </div>
       <div className={styles.content}>
         {listTodo?.map((item, i) => {
