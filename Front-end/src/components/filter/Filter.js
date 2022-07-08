@@ -8,6 +8,10 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
 
     const [valueInput, setValueInput] = React.useState('')
 
+    React.useEffect(() => {
+        setListTodoSearch(listTodo)
+    }, [listTodo])
+
     const handleChange = (e) => {
         if (e.target.value) {
             setValueInput(e.target.value)
@@ -19,7 +23,7 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
             })
             setListTodoSearch(matchingStrings)
         } else {
-            setListTodoSearch(null)
+            setListTodoSearch(listTodo)
         }
     }
 
