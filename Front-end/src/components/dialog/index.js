@@ -12,23 +12,42 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import moment from 'moment';
 import styles from './DialogModal.module.scss'
 export default function DialogModal(props) {
-    const { open, setOpen, setDataForm } = props;
+    const { open, setOpen, setDataForm, item } = props;
     const [endTime, setEndTime] = React.useState(null);
     const [title, setTitle] = React.useState('');
     const [des, setDes] = React.useState('');
 
+    React.useEffect(() => {
+        if (item) {
+            setTitle(item.title)
+            setDes(item.des)
+            if (item.endTime && item.timeNoneFormat) {
+                setEndTime(JSON.parse(item.timeNoneFormat))
+            }
+        }
+    }, [item]);
+
     const handleClose = () => {
         setOpen(false);
     };
+
     const handleSubmit = () => {
-        console.log()
-        const timeFormat = moment(endTime).format("MMM Do YY")
-        setDataForm({
-            endTime: timeFormat,
-            title,
-            des
-        })
-        handleClose()
+        const timeFormat = moment(endTime).format("MMM Do YY");
+        if (typeof (setDataForm) === "function") {
+            const object = {
+                endTime: timeFormat !== "Invalid date" ? timeFormat : "",
+                timeNoneFormat: JSON.stringify(endTime),
+                title,
+                des
+            }
+            if (item && item.id) {
+                setDataForm({...object, id: item.id})
+            } else {
+                setDataForm(object)
+            }
+
+            handleClose()
+        }
     }
     return (
         <Dialog

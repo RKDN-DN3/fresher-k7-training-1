@@ -9,8 +9,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateData } from "../../store/todoSlice";
 const Home = () => {
   const [open, setOpen] = React.useState(false);
+  const [listTodo, setListTodo] = React.useState([]);
   const dataTodo = useSelector((state) => state.todo.data)
   const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    setListTodo([...dataTodo].reverse())
+  }, [dataTodo]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -39,7 +44,7 @@ const Home = () => {
         <Filter />
       </div>
       <div className={styles.content}>
-        {dataTodo?.map((item, i) => {
+        {listTodo?.map((item, i) => {
           return (
             <Item
               key={i}

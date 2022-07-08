@@ -1,16 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [
     {
       id: 0,
       title: 'Javascript',
-      des: 'To day learning Javascript',
-      endTime: '22/2/2022'
-    },
-    {
-      id: 1,
-      title: 'Redux',
       des: 'To day learning Javascript',
       endTime: '22/2/2022'
     },
@@ -34,8 +28,16 @@ export const reduxSlice = createSlice({
   initialState,
   reducers: {
     updateData: (state, action) => {
-      const object = action.payload
-      state.data.push(object)
+      if (action.payload.type && action.payload.type === "edit") {
+        const data = current(state.data).filter((item) => item.id === action.payload.data.id)
+        const index = current(state.data).indexOf(data[0])
+        state.data[index] = action.payload.data
+      } else {
+        const object = action.payload
+        object.id = Math.random()
+        state.data.push(object)
+      }
+
     },
     deleteItem: (state, action) => {
       state.data = state.data.filter((item) => item.id !== action.payload.id)

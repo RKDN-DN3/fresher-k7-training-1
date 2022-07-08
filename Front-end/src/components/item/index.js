@@ -3,12 +3,12 @@ import styles from './Item.module.scss'
 import MoreIconDropDown from '../moreIconDropDown';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux'
-import { deleteItem } from '../../store/todoSlice'
+import { deleteItem, updateData } from '../../store/todoSlice'
 import Dialog from '../dialog'
 
 const Item = (props) => {
 
-  const [ openDialog, setOpenDialog] = React.useState(false);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -19,8 +19,11 @@ const Item = (props) => {
   }
 
   const handleEditItem = () => {
-    console.log(item)
     setOpenDialog(true)
+  }
+
+  const setDataForm = (data) => {
+    dispatch(updateData({data, type: 'edit'}))
   }
 
   return (
@@ -48,7 +51,10 @@ const Item = (props) => {
       </div>
       <Dialog
         open={openDialog}
-      /> 
+        setOpen={setOpenDialog}
+        item={openDialog && item}
+        setDataForm={setDataForm}
+      />
     </div>
   )
 }
