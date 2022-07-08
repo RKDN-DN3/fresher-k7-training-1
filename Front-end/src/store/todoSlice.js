@@ -11,13 +11,13 @@ const initialState = {
     {
       id: 2,
       title: 'React',
-      des: 'To day learning Javascript',
+      des: 'create project with React',
       endTime: '22/2/2022'
     },
     {
       id: 3,
       title: 'Typescript',
-      des: 'To day learning Javascript',
+      des: 'Report on what was learned last week',
       endTime: '22/2/2022'
     }
   ]
