@@ -39,7 +39,8 @@ export default function DialogModal(props) {
                 endTime: timeFormat !== "Invalid date" ? timeFormat : "",
                 timeNoneFormat: JSON.stringify(endTime),
                 title,
-                des
+                des,
+                status: 0
             }
             if (item && item.id) {
                 setDataForm({ ...object, id: item.id })

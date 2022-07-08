@@ -32,8 +32,6 @@ const Home = () => {
     dispatch(updateData(data))
   }
 
-  console.log(listTodoSearch)
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>

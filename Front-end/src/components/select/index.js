@@ -1,16 +1,28 @@
 import React from 'react'
 import { MenuItem, Select as SelectNonOutline } from '@mui/material'
-import styles from './Select.module.scss'
-const Select = () => {
+import styles from './Select.module.scss';
+const options = [
+    { title: 'All', value: 3 },
+    { title: 'Unfinished', value: 0 },
+    { title: 'Success', value: 1 },
+]
+
+const Select = (props) => {
+    const { setSelected } = props
+
     return (
         <SelectNonOutline
-            value={'tien tran'}
+            value={'selected'}
             className={styles.select}
             renderValue={() => "Quick filters"}
+            onChange={setSelected}
         >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {options?.map((item, i) => (
+                <MenuItem
+                    key={i}
+                    value={item.value}
+                >{item.title}</MenuItem>
+            ))}
         </SelectNonOutline>
     )
 }
