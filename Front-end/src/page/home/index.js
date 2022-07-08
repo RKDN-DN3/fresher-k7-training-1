@@ -5,11 +5,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Filter from "../../components/filter/Filter";
 import Item from "../../components/item";
 import DialogModal from "../../components/dialog";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import { updateData } from "../../store/todoSlice";
+
 const Home = () => {
+  
   const [open, setOpen] = React.useState(false);
   const [listTodo, setListTodo] = React.useState([]);
+  const [listTodoSearch, setListTodoSearch] = React.useState([]);
   const dataTodo = useSelector((state) => state.todo.data)
   const dispatch = useDispatch()
 
@@ -41,10 +44,13 @@ const Home = () => {
         </div>
       </div>
       <div className={styles.filter}>
-        <Filter />
+        <Filter
+          listTodo={listTodo && listTodo}
+          setListTodoSearch={setListTodoSearch}
+        />
       </div>
       <div className={styles.content}>
-        {listTodo?.map((item, i) => {
+        {listTodoSearch?.map((item, i) => {
           return (
             <Item
               key={i}
