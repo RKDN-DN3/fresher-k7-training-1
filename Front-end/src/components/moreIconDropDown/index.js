@@ -3,14 +3,18 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { ClickAwayListener, MenuItem, Popper, Typography } from '@mui/material';
 import styles from './MoreIconDropDown.module.scss'
 const MoreIconDropDown = (props) => {
+    
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { id } = props;
+    const { id, onClick, onClickEdit} = props;
+
     const handleClick = event => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     };
+    
     const handleClickAway = () => {
         setAnchorEl(false);
     };
+
     const open = Boolean(anchorEl);
 
     return (
@@ -23,10 +27,14 @@ const MoreIconDropDown = (props) => {
                     anchorEl={anchorEl}
                 >
                     <div  className={styles.popperContent}>
-                        <MenuItem>
+                        <MenuItem
+                             onClick={onClickEdit}
+                        >
                             <Typography>Edit</Typography>
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem
+                            onClick={onClick}
+                        >
                             <Typography>Remove</Typography>
                         </MenuItem>
                     </div>

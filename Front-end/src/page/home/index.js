@@ -4,7 +4,26 @@ import styles from './Home.module.scss';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Filter from "../../components/filter/Filter";
 import Item from "../../components/item";
+import DialogModal from "../../components/dialog";
+import { useSelector, useDispatch } from 'react-redux'
+import { updateData } from "../../store/todoSlice";
 const Home = () => {
+  const [open, setOpen] = React.useState(false);
+  const [listTodo, setListTodo] = React.useState([]);
+  const dataTodo = useSelector((state) => state.todo.data)
+  const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    setListTodo([...dataTodo].reverse())
+  }, [dataTodo]);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const setDataForm = (data) => {
+    dispatch(updateData(data))
+  }
 
   return (
     <div className={styles.container}>
@@ -15,18 +34,30 @@ const Home = () => {
           <Button
             variant="contained"
             className={styles.btnHeader}
-          >New ToDo</Button>
+            onClick={handleClickOpen}
+          >
+            New ToDo
+          </Button>
         </div>
       </div>
       <div className={styles.filter}>
         <Filter />
       </div>
       <div className={styles.content}>
-          <Item/>
-          <Item/>
-          <Item/>
-          <Item/>
+        {listTodo?.map((item, i) => {
+          return (
+            <Item
+              key={i}
+              item={item}
+            />
+          )
+        })}
       </div>
+      <DialogModal
+        open={open}
+        setOpen={setOpen}
+        setDataForm={setDataForm}
+      />
     </div>
   )
 }
