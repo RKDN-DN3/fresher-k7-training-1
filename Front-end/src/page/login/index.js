@@ -21,8 +21,9 @@ function Login() {
 
   const [values, setValues] = useState({
     showPassword: false,
+    username: 'adminuser',
+    password: '@Abc123'
   });
-
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
