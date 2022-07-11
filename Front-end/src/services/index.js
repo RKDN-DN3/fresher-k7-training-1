@@ -17,7 +17,7 @@ const loginUser = (userLogin) => {
 };
 
 const editItem = (data, token) => {
-  return axiosClient.put('/todos/update-todo', data, { headers: { "Authorization": `Bearer ${token}` } })
+  return axiosClient.put('/api/todos/update-todo', data, { headers: { "Authorization": `Bearer ${token}` } })
 }
 
 

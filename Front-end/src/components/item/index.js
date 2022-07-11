@@ -44,8 +44,9 @@ const Item = (props) => {
     const res = await editItem(data, token)
     if (res && res.status === 200) {
       props.handleFetchData()
-      toast.success("Your was delete success!")
+      toast.success("Your was edit success!")
       setOpenLoading(false)
+      setOpenDialog(false)
     } else {
       toast.error("Was an err!")
     }
