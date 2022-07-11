@@ -6,11 +6,13 @@ import Filter from "../../components/filter/Filter";
 import Item from "../../components/item";
 import DialogModal from "../../components/dialog";
 import { getAllItem, createItem } from '../../services';
+import { toast } from 'react-toastify';
+import BackdropLoading from "../../components/backDrop";
 
 const token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW51c2VyIiwidXNlcklkIjoiMzA4NTBkYzctODg5My00NGU5LWEzZjYtMDY5MGFiNmIwNWM5Iiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjU3NTI1NjMxLCJpc3MiOiJIb3RlbExpc3RpbmdBUEkifQ.zhiHpJeEOkd6MIyYQbIRpw6eZCxf-nG8OHwnzyrr-R76-xJoi0X49bYHS90eH2PpweCJ-ZuzmRlkkcCsaNbi9A'
 
 const Home = () => {
-
+  const [openLoading, setOpenLoading] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [listTodo, setListTodo] = React.useState([]);
   const [listTodoSearch, setListTodoSearch] = React.useState([]);
@@ -21,12 +23,13 @@ const Home = () => {
       if (res.data && res.data.isSuccess === true) {
         const object = res.data.result
         setListTodo(object)
-        console.log(object)
+        setOpenLoading(false)
       }
     }
   }
 
   React.useEffect(() => {
+    setOpenLoading(true)
     handleFetchData()
   }, [])
 
@@ -39,11 +42,16 @@ const Home = () => {
   };
 
   const setDataForm = async (data) => {
+    setOpenLoading(true)
     const res = await createItem(data, token);
     if (res && res.status === 200) {
       handleFetchData()
       setOpen(false);
-    } 
+      toast.success("Your was create success!")
+      setOpenLoading(false)
+    } else {
+      toast.error("Was an err!")
+    }
   }
 
   return (
@@ -86,6 +94,7 @@ const Home = () => {
         setOpen={setOpen}
         setDataForm={setDataForm}
       />
+      <BackdropLoading openLoading={openLoading}/>
     </div>
   )
 }
