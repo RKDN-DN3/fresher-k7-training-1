@@ -5,6 +5,8 @@ import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux'
 import { deleteItem, updateData, checkItem, removeTask } from '../../store/todoSlice';
 import CheckIcon from '@mui/icons-material/Check';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '../dialog'
 
 const Item = (props) => {
@@ -40,17 +42,17 @@ const Item = (props) => {
         <div className={styles.actions}>
           <Button
             variant='contained'
-            className={item.status === 1 ? styles.btnCheck : styles.btnDone}
+            className={item.status === 1 ? styles.btnDone : styles.btnCheck}
             onClick={handleCheckItem}
           >
-            {item.status === 1 ? <CheckIcon /> : 'Done'}
+            {item.status === 1 ? <AutorenewIcon/> : <CheckIcon />}
           </Button>
           {item.status === 1 &&
             <Button
               variant='contained'
               className={styles.btnRemove}
               onClick={() => dispatch(removeTask(item))}
-            >Remove</Button>
+            ><DeleteIcon/></Button>
           }
         </div>
       </div>
