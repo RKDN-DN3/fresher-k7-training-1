@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.API\obj\Release\net6.0\win-x86\PubTmp\Out\" />
+  <dbfullsql path="E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.API\obj\Release\net6.0\win-x86\PubTmp\EFSQLScripts\ToDo.Sample.DataAccess.Data.ApplicationDbContext.sql" />
+</sitemanifest>

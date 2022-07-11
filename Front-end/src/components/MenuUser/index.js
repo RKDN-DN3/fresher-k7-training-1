@@ -48,7 +48,12 @@ const MenuUser = () => {
                                 style={{ color: '#333' }}
                             >Register</Link>
                         </MenuItem>
-                        <MenuItem onClick={handleClose}>Login</MenuItem>
+                        <MenuItem onClick={handleClose}>
+                            <Link
+                                to='/login'
+                                style={{ color: '#333' }}
+                            >Login</Link>
+                        </MenuItem>
                     </Menu>
                 </div>
             )}
