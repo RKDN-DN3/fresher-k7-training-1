@@ -1,4 +1,4 @@
-import { Button, TextField, FormControl } from "@mui/material";
+import { Button, TextField, FormControl, Alert } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
@@ -8,9 +8,13 @@ import InputLabel from "@mui/material/InputLabel";
 import React, { useState } from "react";
 import styles from "./Register.module.scss";
 import FormError from "../../components/formError";
-import { getUser } from '../../services';
+import { registerUser } from "../../services";
+import { useNavigate } from "react-router-dom";
+import BackdropLoading from "../../components/backDrop";
 
 const Register = () => {
+  const [openLoading, setOpenLoading] = useState(false);
+  const [alertSuccess, setAlertSuccess] = useState(false);
   const [values, setValues] = useState({
     showPassword: false,
     showCPassword: false,
@@ -18,10 +22,31 @@ const Register = () => {
 
   const [errors, setErrors] = useState({});
 
+  const navigate = useNavigate();
+
+  const userRegister = JSON.stringify({
+    fullName: values.fullname,
+    userName: values.username,
+    email: values.email,
+    password: values.password,
+  });
+
+  const handleRegister = async () => {
+    const res = await registerUser(userRegister);
+    if (res) {
+      setAlertSuccess(true);
+      setOpenLoading(false);
+    }
+  };
+
+  const handleDirectLogin = () => {
+    navigate("/login");
+  };
+
   const handleOnChange = (prop) => (e) => {
     setValues({ ...values, [prop]: e.target.value });
   };
-  console.log(getUser())
+
   const handleClickShowPassword = (prop) => (e) => {
     if (prop === "password") {
       setValues({ ...values, showPassword: !values.showPassword });
@@ -42,16 +67,27 @@ const Register = () => {
 
   const validatePassword = (pass) => {
     if (pass) {
-      return pass.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/);
+      return pass.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/
+      );
     }
   };
 
   const handleSubmitRegister = (e) => {
     e.preventDefault();
-
+    setOpenLoading(true);
     let isSubmit = true;
 
     let inputsError = {};
+
+    if (
+      values.fullname === null ||
+      values.fullname === undefined ||
+      values.fullname === ""
+    ) {
+      inputsError.fullname = "Fullname không được để trống";
+      isSubmit = false;
+    }
 
     if (
       values.username === null ||
@@ -107,18 +143,20 @@ const Register = () => {
 
     if (!isSubmit) {
       setErrors(inputsError);
+      setOpenLoading(false);
     } else {
-      alert("Register Successfully!!!");
       if (Object.keys(errors).length > 0) {
         setErrors({});
       }
       setValues({
         ...values,
+        fullname: "",
         username: "",
         email: "",
         password: "",
         cpassword: "",
       });
+      handleRegister();
     }
   };
 
@@ -130,8 +168,28 @@ const Register = () => {
       <div className={styles.content}>
         <FormControl fullWidth sx={{ m: 1 }}>
           <FormError errors={errors} />
+          {alertSuccess === true ? (
+            <Alert severity="success">
+              Register Successfully — 
+              <strong className={styles.pointer} onClick={handleDirectLogin}>
+                Login now
+              </strong>
+            </Alert>
+          ) : (
+            ""
+          )}
         </FormControl>
         <form onSubmit={handleSubmitRegister}>
+          <FormControl fullWidth sx={{ m: 1 }}>
+            <TextField
+              id="outlined-fullname"
+              name="fullname"
+              label="FullName"
+              variant="outlined"
+              value={values.fullname ? values.fullname : ""}
+              onChange={handleOnChange("fullname")}
+            />
+          </FormControl>
           <FormControl fullWidth sx={{ m: 1 }}>
             <TextField
               id="outlined-username"
@@ -212,6 +270,7 @@ const Register = () => {
           </FormControl>
         </form>
       </div>
+      <BackdropLoading openLoading={openLoading} />
     </div>
   );
 };

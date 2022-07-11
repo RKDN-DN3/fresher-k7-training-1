@@ -24,10 +24,15 @@ const loginUser = (userLogin) => {
   return axiosClient.post("/api/user/Login", userLogin);
 };
 
+const registerUser = (userRegister) => {
+  return axiosClient.post("/api/user/Register", userRegister);
+}
+
 export {
   getUser,
   getAllItem,
   createItem,
   loginUser,
+  registerUser,
   deleteItem
 }
