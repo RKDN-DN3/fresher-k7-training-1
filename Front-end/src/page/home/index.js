@@ -5,34 +5,54 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Filter from "../../components/filter/Filter";
 import Item from "../../components/item";
 import DialogModal from "../../components/dialog";
-import { useSelector, useDispatch } from 'react-redux';
-import { updateData } from "../../store/todoSlice";
+import { getAllItem, createItem } from '../../services';
+import { toast } from 'react-toastify';
+import BackdropLoading from "../../components/backDrop";
+
+const token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW51c2VyIiwidXNlcklkIjoiMzA4NTBkYzctODg5My00NGU5LWEzZjYtMDY5MGFiNmIwNWM5Iiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjU3NTI1NjMxLCJpc3MiOiJIb3RlbExpc3RpbmdBUEkifQ.zhiHpJeEOkd6MIyYQbIRpw6eZCxf-nG8OHwnzyrr-R76-xJoi0X49bYHS90eH2PpweCJ-ZuzmRlkkcCsaNbi9A'
 
 const Home = () => {
-
+  const [openLoading, setOpenLoading] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [listTodo, setListTodo] = React.useState([]);
   const [listTodoSearch, setListTodoSearch] = React.useState([]);
-  const dataTodo = useSelector((state) => state.todo.data)
-  const dispatch = useDispatch()
+
+  const handleFetchData = async () => {
+    const res = await getAllItem(token)
+    if (res && res.status === 200) {
+      if (res.data && res.data.isSuccess === true) {
+        const object = res.data.result
+        setListTodo(object)
+        setOpenLoading(false)
+      }
+    }
+  }
 
   React.useEffect(() => {
-    setListTodoSearch([...dataTodo].reverse())
-  }, [dataTodo]);
+    setOpenLoading(true)
+    handleFetchData()
+  }, [])
 
   React.useEffect(() => {
-    setListTodo([...dataTodo].reverse())
-  }, [dataTodo]);
+    setListTodoSearch([...listTodo].reverse())
+  }, [listTodo]);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const setDataForm = (data) => {
-    dispatch(updateData(data))
+  const setDataForm = async (data) => {
+    setOpenLoading(true)
+    const res = await createItem(data, token);
+    if (res && res.status === 200) {
+      handleFetchData()
+      setOpen(false);
+      toast.success("Your was create success!")
+      setOpenLoading(false)
+    } else {
+      toast.error("Was an err!")
+    }
   }
-
-  console.log(listTodoSearch)
 
   return (
     <div className={styles.container}>
@@ -57,10 +77,14 @@ const Home = () => {
       </div>
       <div className={styles.content}>
         {listTodoSearch?.map((item, i) => {
+          if (item.status === 2) {
+            listTodoSearch.splice(i, 1)
+          }
           return (
             <Item
               key={i}
               item={item}
+              handleFetchData={handleFetchData}
             />
           )
         })}
@@ -70,6 +94,7 @@ const Home = () => {
         setOpen={setOpen}
         setDataForm={setDataForm}
       />
+      <BackdropLoading openLoading={openLoading}/>
     </div>
   )
 }
