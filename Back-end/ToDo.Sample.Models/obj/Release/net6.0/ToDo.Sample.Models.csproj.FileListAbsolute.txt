@@ -1,0 +1,12 @@
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\bin\Release\net6.0\ToDo.Sample.Models.deps.json
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\bin\Release\net6.0\ToDo.Sample.Models.dll
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\bin\Release\net6.0\ToDo.Sample.Models.pdb
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ToDo.Sample.Models.csproj.AssemblyReference.cache
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ToDo.Sample.Models.GeneratedMSBuildEditorConfig.editorconfig
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ToDo.Sample.Models.AssemblyInfoInputs.cache
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ToDo.Sample.Models.AssemblyInfo.cs
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ToDo.Sample.Models.csproj.CoreCompileInputs.cache
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ToDo.Sample.Models.dll
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\refint\ToDo.Sample.Models.dll
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ToDo.Sample.Models.pdb
+E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Release\net6.0\ref\ToDo.Sample.Models.dll

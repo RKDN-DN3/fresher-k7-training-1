@@ -29,11 +29,13 @@ const MoreIconDropDown = (props) => {
                     <div  className={styles.popperContent}>
                         <MenuItem
                              onClick={onClickEdit}
+                             className={styles.itemEdit}
                         >
                             <Typography>Edit</Typography>
                         </MenuItem>
                         <MenuItem
                             onClick={onClick}
+                            className={styles.itemDelete}
                         >
                             <Typography>Remove</Typography>
                         </MenuItem>

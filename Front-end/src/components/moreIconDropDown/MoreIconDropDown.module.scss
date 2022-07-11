@@ -11,6 +11,16 @@
   padding: 5px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   p {
-      font-size: 14px !important;
+    font-size: 14px !important;
+  }
+}
+.itemEdit {
+  p {
+    color: #49af80;
+  }
+}
+.itemDelete {
+  p {
+    color: #df7150;
   }
 }
