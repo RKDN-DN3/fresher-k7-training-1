@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWZexaMDTCEOgx+hyZ2BGtgAAAAACAAAAAAAQZgAAAAEAACAAAACt2OzSOOSsvoAhiB4p9x0YDH5wgO6jYks/nbmGvCoSAAAAAAAOgAAAAAIAACAAAAChWBfKTHA9LGaA17Yl6sgeuFJHJWto6mgNupTMFBIen4AAAAAIOjZYJ5S5gzVRcsiqnwUPsxoJymsNCZMgYvCDL0briCL63NDFo9RRPQegEc9NPV5aavXuF0E0txtpg9y4XwrNf42yjZN09KZwO3sydTAqjkFo7WkHPnp6LHbadJlXS8OP2SpMr59/Lk9yWEprDBs9Vd7WHG8yaDMirPKmKfPtdkAAAADkmu6g9SWJAmuQ7ymgHQfAwuP4dFZgc2bSl3EZ30bFJ09dynVcnNuGWYQauKe1aaXdcgziN987+3GlbMf5rS1w</EncryptedPassword>
+    <History>True|2022-07-10T15:29:25.5810181Z;True|2022-07-10T22:18:40.3118743+07:00;True|2022-07-10T22:11:13.1146105+07:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=tcp:sampletodomasteryserver.database.windows.net,1433%3bInitial Catalog=sampletodomastery_db%3bPersist Security Info=False%3bUser ID=donet%3bPassword=Quang,4179%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="ToDo.Sample.DataAccess.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:sampletodomasteryserver.database.windows.net,1433%3bInitial Catalog=sampletodomastery_db%3bUser Id=donet%40sampletodomasteryserver%3bPassword=Quang,4179</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
