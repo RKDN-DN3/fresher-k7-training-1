@@ -12,7 +12,7 @@ import moment from 'moment';
 import { deleteItem } from '../../services';
 import { toast } from 'react-toastify';
 import BackdropLoading from '../backDrop';
-const token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW51c2VyIiwidXNlcklkIjoiMzA4NTBkYzctODg5My00NGU5LWEzZjYtMDY5MGFiNmIwNWM5Iiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjU3NTI1NjMxLCJpc3MiOiJIb3RlbExpc3RpbmdBUEkifQ.zhiHpJeEOkd6MIyYQbIRpw6eZCxf-nG8OHwnzyrr-R76-xJoi0X49bYHS90eH2PpweCJ-ZuzmRlkkcCsaNbi9A'
+import { token }from '../../util/getTokenLocal';
 
 const Item = (props) => {
 

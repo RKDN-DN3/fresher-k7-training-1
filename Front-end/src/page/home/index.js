@@ -8,8 +8,7 @@ import DialogModal from "../../components/dialog";
 import { getAllItem, createItem } from '../../services';
 import { toast } from 'react-toastify';
 import BackdropLoading from "../../components/backDrop";
-
-const token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW51c2VyIiwidXNlcklkIjoiMzA4NTBkYzctODg5My00NGU5LWEzZjYtMDY5MGFiNmIwNWM5Iiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjU3NTI1NjMxLCJpc3MiOiJIb3RlbExpc3RpbmdBUEkifQ.zhiHpJeEOkd6MIyYQbIRpw6eZCxf-nG8OHwnzyrr-R76-xJoi0X49bYHS90eH2PpweCJ-ZuzmRlkkcCsaNbi9A'
+import  { token } from '../../util/getTokenLocal';
 
 const Home = () => {
   const [openLoading, setOpenLoading] = React.useState(false);

@@ -3,6 +3,7 @@ import Register from "../page/register";
 import History from "../page/history";
 import Login from "../page/login";
 
+
 const publicRouters = [
   {
     path: "/",

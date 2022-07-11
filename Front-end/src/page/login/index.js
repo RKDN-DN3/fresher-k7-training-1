@@ -14,8 +14,11 @@ import styles from "./Login.module.scss";
 import FormError from "../../components/formError";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services";
+import BackdropLoading from "../../components/backDrop";
 
 function Login() {
+  const [openLoading, setOpenLoading] = React.useState(false);
+
   const [values, setValues] = useState({
     showPassword: false,
   });
@@ -38,7 +41,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setOpenLoading(true)
     let isSubmit = true;
 
     let inputsError = {};
@@ -78,7 +81,9 @@ function Login() {
         .then((res) => {
           if (res.data.token) {
             localStorage.setItem("tokenUserLogin", res.data.token);
+            window.location.reload();
             navigate("/");
+            setOpenLoading(false)
           }
         })
         .catch((err) => console.log(err));
@@ -138,6 +143,7 @@ function Login() {
           </FormControl>
         </form>
       </div>
+      <BackdropLoading openLoading={openLoading}/>
     </div>
   );
 }

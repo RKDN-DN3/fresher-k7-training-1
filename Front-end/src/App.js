@@ -6,17 +6,25 @@ import {
 } from "react-router-dom";
 import { publicRouters } from './router'
 import DefaultLayout from './components/layout/DefaultLayout';
-function App() {
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import NotFound from "./components/NotFound";
+import Login from "./page/login";
+import { token } from "./util/getTokenLocal";
 
+function App() {
+  console.log(token)
   return (
     <GlobalStyle>
       <BrowserRouter>
         <Routes>
           {publicRouters?.map((route, index) => {
-
-            const Component = route.component;
+            let Component = Login;
+            if(token) {
+              Component = route.component;
+            }
             let LayoutRender = DefaultLayout;
-
+            
             return (
               <Route
                 key={index}
@@ -29,10 +37,11 @@ function App() {
               />
             )
           })}
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </GlobalStyle>
-
   );
 }
 
