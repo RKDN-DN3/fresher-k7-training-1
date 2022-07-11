@@ -55,6 +55,9 @@ const Home = () => {
       </div>
       <div className={styles.content}>
         {listTodoSearch?.map((item, i) => {
+          if (item.status === 2) {
+            listTodoSearch.splice(i, 1)
+          }
           return (
             <Item
               key={i}

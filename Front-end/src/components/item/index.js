@@ -39,22 +39,25 @@ const Item = (props) => {
         <div className={styles.title}>{item.title}</div>
         <div className={styles.content}>{item.des}</div>
         <div className={styles.time}>{item.endTime}</div>
-        <div className={styles.actions}>
-          <Button
-            variant='contained'
-            className={item.status === 1 ? styles.btnDone : styles.btnCheck}
-            onClick={handleCheckItem}
-          >
-            {item.status === 1 ? <AutorenewIcon/> : <CheckIcon />}
-          </Button>
-          {item.status === 1 &&
+        {props.disableAction === true ?
+          '' :
+          <div className={styles.actions}>
             <Button
               variant='contained'
-              className={styles.btnRemove}
-              onClick={() => dispatch(removeTask(item))}
-            ><DeleteIcon/></Button>
-          }
-        </div>
+              className={item.status === 1 ? styles.btnDone : styles.btnCheck}
+              onClick={handleCheckItem}
+            >
+              {item.status === 1 ? <AutorenewIcon /> : <CheckIcon />}
+            </Button>
+            {item.status === 1 &&
+              <Button
+                variant='contained'
+                className={styles.btnRemove}
+                onClick={() => dispatch(removeTask(item))}
+              ><DeleteIcon /></Button>
+            }
+          </div>
+        }
       </div>
       <div className={styles.right}>
         <MoreIconDropDown

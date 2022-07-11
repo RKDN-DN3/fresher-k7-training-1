@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import styles from "./Register.module.scss";
 import FormError from "../../components/formError";
 import { getUser } from '../../services';
-import axios from 'axios';
+
 const Register = () => {
   const [values, setValues] = useState({
     showPassword: false,
