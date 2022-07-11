@@ -7,7 +7,8 @@ import Item from "../../components/item";
 import DialogModal from "../../components/dialog";
 import { getAllItem, createItem } from '../../services';
 
-const token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW51c2VyIiwidXNlcklkIjoiMzA4NTBkYzctODg5My00NGU5LWEzZjYtMDY5MGFiNmIwNWM5Iiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjU3NTE2Mzk2LCJpc3MiOiJIb3RlbExpc3RpbmdBUEkifQ.UBLR3FfeI1o6AAlAEugkggWlMukOccop14Ofn5R9G2mllNls1FXsSz8pd8wd-Zppl6ZHJNngA2m6CJQCTnMT6A'
+const token = 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW51c2VyIiwidXNlcklkIjoiMzA4NTBkYzctODg5My00NGU5LWEzZjYtMDY5MGFiNmIwNWM5Iiwicm9sZSI6IkFkbWluIiwiZXhwIjoxNjU3NTI1NjMxLCJpc3MiOiJIb3RlbExpc3RpbmdBUEkifQ.zhiHpJeEOkd6MIyYQbIRpw6eZCxf-nG8OHwnzyrr-R76-xJoi0X49bYHS90eH2PpweCJ-ZuzmRlkkcCsaNbi9A'
+
 const Home = () => {
 
   const [open, setOpen] = React.useState(false);
@@ -18,8 +19,9 @@ const Home = () => {
     const res = await getAllItem(token)
     if (res && res.status === 200) {
       if (res.data && res.data.isSuccess === true) {
-        let object = res.data.result
+        const object = res.data.result
         setListTodo(object)
+        console.log(object)
       }
     }
   }
@@ -40,6 +42,7 @@ const Home = () => {
     const res = await createItem(data, token);
     if (res && res.status === 200) {
       handleFetchData()
+      setOpen(false);
     } 
   }
 
@@ -73,6 +76,7 @@ const Home = () => {
             <Item
               key={i}
               item={item}
+              handleFetchData={handleFetchData}
             />
           )
         })}
