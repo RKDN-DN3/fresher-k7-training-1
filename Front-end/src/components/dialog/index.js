@@ -34,7 +34,6 @@ export default function DialogModal(props) {
 
     const handleSubmit = () => {
         const timeFormat = moment(endTime).format();
-        console.log(timeFormat)
         if (typeof (setDataForm) === "function") {
             const object = {
                 timeNoneFormat: timeFormat,

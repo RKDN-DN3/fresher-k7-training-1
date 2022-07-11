@@ -7,6 +7,7 @@ const publicRouters = [
   {
     path: "/",
     component: Home,
+    login:  true
   },
   {
     path: "/register",
@@ -19,6 +20,7 @@ const publicRouters = [
   {
     path: "/history",
     component: History,
+    login: true
   },
 ];
 
