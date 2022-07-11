@@ -96,6 +96,7 @@ function Login() {
       <div className={styles.header}>
         <h1>Login</h1>
       </div>
+      <div style={{color: "red"}}>Demo with default user and password</div>
       <div className={styles.content}>
         <FormControl fullWidth sx={{ m: 1 }}>
           <FormError errors={errors} />

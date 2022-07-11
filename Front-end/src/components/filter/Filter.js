@@ -26,12 +26,10 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
     const setSelected = (e) => {
         if (e.target.value === 3) {
             setListTodoSearch(listTodo)
-            console.log(listTodo)
         } else {
             let copyArr = [...listTodo]
             copyArr = listTodo.filter((item) => item.status === e.target.value);
             setListTodoSearch(copyArr)
-            console.log(copyArr)
         }
     }
 

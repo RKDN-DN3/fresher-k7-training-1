@@ -8,7 +8,6 @@ import InputLabel from "@mui/material/InputLabel";
 import React, { useState } from "react";
 import styles from "./Register.module.scss";
 import FormError from "../../components/formError";
-import { getUser } from '../../services';
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -21,7 +20,6 @@ const Register = () => {
   const handleOnChange = (prop) => (e) => {
     setValues({ ...values, [prop]: e.target.value });
   };
-  console.log(getUser())
   const handleClickShowPassword = (prop) => (e) => {
     if (prop === "password") {
       setValues({ ...values, showPassword: !values.showPassword });
