@@ -42,7 +42,6 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpenLoading(true)
     let isSubmit = true;
 
     let inputsError = {};
@@ -54,6 +53,7 @@ function Login() {
     ) {
       inputsError.username = "Username không được để trống";
       isSubmit = false;
+      setOpenLoading(false)
     }
 
     if (
@@ -77,7 +77,7 @@ function Login() {
         emailOrUserName: values.username,
         password: values.password,
       });
-
+      setOpenLoading(true)
       loginUser(userLogin)
         .then((res) => {
           if (res.data.token) {
