@@ -13,18 +13,20 @@ import Login from "./page/login";
 import { token } from "./util/getTokenLocal";
 
 function App() {
-  console.log(token)
   return (
     <GlobalStyle>
       <BrowserRouter>
         <Routes>
           {publicRouters?.map((route, index) => {
-            let Component = Login;
-            if(token) {
-              Component = route.component;
-            }
+            let Component = route.component;
             let LayoutRender = DefaultLayout;
-            
+            if (route.login) {
+              if (token) {
+                Component = route.component
+              } else {
+                Component = Login
+              }
+            }
             return (
               <Route
                 key={index}
@@ -37,7 +39,12 @@ function App() {
               />
             )
           })}
-          <Route path='*' element={<NotFound />} />
+          <Route path='*'
+            element={
+              <DefaultLayout>
+                <NotFound />
+              </DefaultLayout>
+            } />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

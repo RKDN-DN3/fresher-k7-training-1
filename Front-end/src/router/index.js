@@ -2,12 +2,13 @@ import Home from "../page/home";
 import Register from "../page/register";
 import History from "../page/history";
 import Login from "../page/login";
-
+import { token } from "../util/getTokenLocal";
 
 const publicRouters = [
   {
     path: "/",
     component: Home,
+    login:  true
   },
   {
     path: "/register",
@@ -20,6 +21,7 @@ const publicRouters = [
   {
     path: "/history",
     component: History,
+    login: true
   },
 ];
 

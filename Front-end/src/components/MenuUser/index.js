@@ -49,12 +49,14 @@ const MenuUser = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>
-                            <Link
-                                to='/register'
-                                style={{ color: '#333' }}
-                            >Register</Link>
-                        </MenuItem>
+                        {!token &&
+                            <MenuItem onClick={handleClose}>
+                                <Link
+                                    to='/register'
+                                    style={{ color: '#333' }}
+                                >Register</Link>
+                            </MenuItem>
+                        }
                         {!token ?
                             <MenuItem onClick={handleClose}>
                                 <Link
@@ -64,7 +66,7 @@ const MenuUser = () => {
                             </MenuItem>
                             :
                             <MenuItem onClick={handleLogout}>
-                               Logout
+                                Logout
                             </MenuItem>
                         }
 
