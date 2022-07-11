@@ -1,11 +1,13 @@
-import axiosClient from '../axios';
+import axiosClient from "../axios";
 const getUser = () => {
-    return axiosClient.post('/api/user/Login', {
-        "emailOrUserName": "adminuser",
-        "password": "@Abc123"
-    })
-}
+  return axiosClient.post("/api/user/Login", {
+    emailOrUserName: "adminuser",
+    password: "@Abc123",
+  });
+};
 
-export {
-    getUser
-}
+const loginUser = (userLogin) => {
+  return axiosClient.post("/api/user/Login", userLogin);
+};
+
+export { getUser, loginUser };
