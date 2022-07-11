@@ -21,9 +21,9 @@ export default function DialogModal(props) {
     React.useEffect(() => {
         if (item) {
             setTitle(item.title)
-            setDes(item.des)
-            if (item.endTime && item.timeNoneFormat) {
-                setEndTime(JSON.parse(item.timeNoneFormat))
+            setDes(item.description)
+            if (item.endDate) {
+                setEndTime(moment(item.endDate).format())
             }
         }
     }, [item]);
@@ -36,9 +36,11 @@ export default function DialogModal(props) {
         const timeFormat = moment(endTime).format();
         if (typeof (setDataForm) === "function") {
             const object = {
-                timeNoneFormat: timeFormat,
+                id: item.id,
+                endDate: timeFormat,
                 title,
-                description: des
+                description: des,
+                startDate: item.startDate
             }
             setDataForm(object)
         }
