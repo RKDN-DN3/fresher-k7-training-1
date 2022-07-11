@@ -30,6 +30,9 @@ export const reduxSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
+    getAllItemRedux: async (state, action) => {
+      state.data = action.payload
+    },
     updateData: (state, action) => {
       if (action.payload.type && action.payload.type === "edit") {
         const data = current(state.data).filter((item) => item.id === action.payload.data.id)
@@ -49,8 +52,8 @@ export const reduxSlice = createSlice({
     checkItem: (state, action) => {
       state.data.forEach((item) => {
         if (item.id === action.payload.id) {
-          if( item.status === 1) {
-            item.status = 0 
+          if (item.status === 1) {
+            item.status = 0
           } else {
             item.status = 1
           }
@@ -67,6 +70,7 @@ export const reduxSlice = createSlice({
   }
 });
 
+export const { getAllItemRedux } = reduxSlice.actions;
 export const { updateData } = reduxSlice.actions;
 export const { deleteItem } = reduxSlice.actions;
 export const { checkItem } = reduxSlice.actions;

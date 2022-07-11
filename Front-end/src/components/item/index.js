@@ -7,7 +7,8 @@ import { deleteItem, updateData, checkItem, removeTask } from '../../store/todoS
 import CheckIcon from '@mui/icons-material/Check';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Dialog from '../dialog'
+import Dialog from '../dialog';
+import moment from 'moment';
 
 const Item = (props) => {
 
@@ -37,8 +38,8 @@ const Item = (props) => {
     <div className={styles.item}>
       <div className={styles.left}>
         <div className={styles.title}>{item.title}</div>
-        <div className={styles.content}>{item.des}</div>
-        <div className={styles.time}>{item.endTime}</div>
+        <div className={styles.content}>{item.description}</div>
+        <div className={styles.time}>{moment(item.endDate).format("MMM Do YY")}</div>
         {props.disableAction === true ?
           '' :
           <div className={styles.actions}>

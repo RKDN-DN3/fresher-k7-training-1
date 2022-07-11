@@ -33,21 +33,15 @@ export default function DialogModal(props) {
     };
 
     const handleSubmit = () => {
-        const timeFormat = moment(endTime).format("MMM Do YY");
+        const timeFormat = moment(endTime).format();
+        console.log(timeFormat)
         if (typeof (setDataForm) === "function") {
             const object = {
-                endTime: timeFormat !== "Invalid date" ? timeFormat : "",
-                timeNoneFormat: JSON.stringify(endTime),
+                timeNoneFormat: timeFormat,
                 title,
-                des
+                description: des
             }
-            if (item && item.id) {
-                setDataForm({ ...object, id: item.id, status: item.status })
-            } else {
-                setDataForm(object)
-            }
-
-            handleClose()
+            setDataForm(object)
         }
     }
     return (
