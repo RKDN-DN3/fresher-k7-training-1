@@ -12,8 +12,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import React, { useState } from "react";
 import styles from "./Login.module.scss";
 import FormError from "../../components/formError";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../services";
 
 function Login() {
   const [values, setValues] = useState({
@@ -64,7 +64,6 @@ function Login() {
     if (!isSubmit) {
       setErrors(inputsError);
     } else {
-
       if (Object.keys(errors).length > 0) {
         setErrors({});
       }
@@ -75,19 +74,12 @@ function Login() {
         password: values.password,
       });
 
-      axios
-        .post("https://todosample.azurewebsites.net/api/user/Login", userLogin, {
-            headers: {
-              'Content-Type': 'application/json; charset=utf-8'
-            }
-          })
-        .then((res) => 
-        {
-            if(res.data.token)
-            {
-                localStorage.setItem("tokenUserLogin", res.data.token);
-                navigate("/")
-            }
+      loginUser(userLogin)
+        .then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("tokenUserLogin", res.data.token);
+            navigate("/");
+          }
         })
         .catch((err) => console.log(err));
     }
