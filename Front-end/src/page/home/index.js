@@ -21,12 +21,9 @@ const Home = () => {
     if (res && res.status === 200) {
       if (res.data && res.data.isSuccess === true) {
         const data = res.data.result;
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].status === 2) {
-            data.splice(i)
-          }
-        }
-        setListTodo(data)
+        const arr = data.filter((item) => item.status !== 2)
+        console.log(arr)
+        setListTodo(arr)
         setOpenLoading(false)
       }
     }
