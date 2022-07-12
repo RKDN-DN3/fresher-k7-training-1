@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj": {}
+    "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj": {
+    "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj",
+        "projectUniqueName": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj",
         "projectName": "ToDo.Sample.DataAccess",
-        "projectPath": "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj",
+        "projectPath": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.DataAccess\\ToDo.Sample.DataAccess.csproj",
         "packagesPath": "C:\\Users\\QuangLB\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.DataAccess\\obj\\",
+        "outputPath": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\QuangLB\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj": {
-                "projectPath": "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj"
+              "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj": {
+                "projectPath": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj"
               }
             }
           }
@@ -96,14 +96,14 @@
         }
       }
     },
-    "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj": {
+    "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
+        "projectUniqueName": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
         "projectName": "ToDo.Sample.Models",
-        "projectPath": "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
+        "projectPath": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
         "packagesPath": "C:\\Users\\QuangLB\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\QuangLB\\Downloads\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\obj\\",
+        "outputPath": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\QuangLB\\AppData\\Roaming\\NuGet\\NuGet.Config",
