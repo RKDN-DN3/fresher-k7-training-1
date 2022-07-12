@@ -34,20 +34,20 @@ export default function DialogModal(props) {
     };
 
     const handleSubmit = () => {
-        // const timeFormat = moment(endTime).format();
-        // const timeFormat = moment(endTime).startOf('day');
+        const localTime = moment(endTime).format('YYYY-MM-DD');
+        const proposedDate = localTime + "T00:00:00.000Z";
+        console.log(proposedDate)
         if (typeof (setDataForm) === "function") {
             const object = {
                 title,
                 description: des,
-                endDate: endTime,
+                endDate: proposedDate,
                 startDate: startTime
             }
             if (item && item.id) {
                 setDataForm({
                     ...object,
                     id: item.id,
-                    startDate: item.startDate,
                     status: item.status
                 })
             } else {
