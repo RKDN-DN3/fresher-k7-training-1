@@ -12,6 +12,7 @@ import BackdropLoading from '../backDrop';
 import { token } from '../../util/getTokenLocal';
 import ButtonIconLoading from '../buttonIconLoading';
 
+
 const Item = (props) => {
 
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -71,17 +72,16 @@ const Item = (props) => {
     }
   }
   const handleRemoveItemOutHome = async () => {
-    // setOpenIconLoading(true)
-    // const itemData = item;
-    // itemData.status = 2;
-    // const res = await editItem(itemData, token)
-    // if (res && res.status === 200) {
-    //   setOpenIconLoading(false)
-    //   props.handleFetchData()
-    // } else {
-    //   toast.error("Was an err!")
-    // }
-    console.log(item)
+    setOpenIconLoading(true)
+    const itemData = item;
+    itemData.status = 2;
+    const res = await editItem(itemData, token)
+    if (res && res.status === 200) {
+      setOpenIconLoading(false)
+      props.handleFetchData()
+    } else {
+      toast.error("Was an err!")
+    }
   }
   return (
     <>
