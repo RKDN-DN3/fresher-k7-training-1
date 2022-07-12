@@ -8,12 +8,9 @@ import InputLabel from "@mui/material/InputLabel";
 import React, { useState } from "react";
 import styles from "./Register.module.scss";
 import FormError from "../../components/formError";
-<<<<<<< HEAD
 import { registerUser } from "../../services";
 import { useNavigate } from "react-router-dom";
 import BackdropLoading from "../../components/backDrop";
-=======
->>>>>>> fd9fb09374486e9cf1e7fa3ab9cb80d2dd4783c4
 
 const Register = () => {
   const [openLoading, setOpenLoading] = useState(false);
@@ -49,10 +46,7 @@ const Register = () => {
   const handleOnChange = (prop) => (e) => {
     setValues({ ...values, [prop]: e.target.value });
   };
-<<<<<<< HEAD
 
-=======
->>>>>>> fd9fb09374486e9cf1e7fa3ab9cb80d2dd4783c4
   const handleClickShowPassword = (prop) => (e) => {
     if (prop === "password") {
       setValues({ ...values, showPassword: !values.showPassword });
@@ -176,7 +170,7 @@ const Register = () => {
           <FormError errors={errors} />
           {alertSuccess === true ? (
             <Alert severity="success">
-              Register Successfully — 
+              Register Successfully —
               <strong className={styles.pointer} onClick={handleDirectLogin}>
                 Login now
               </strong>
