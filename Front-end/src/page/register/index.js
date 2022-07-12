@@ -26,6 +26,7 @@ const Register = () => {
 
   const userRegister = JSON.stringify({
     fullName: values.fullname,
+    PhoneNumber: values.phone,
     userName: values.username,
     email: values.email,
     password: values.password,
@@ -90,6 +91,15 @@ const Register = () => {
     }
 
     if (
+      values.phone === null ||
+      values.phone === undefined ||
+      values.phone === ""
+    ) {
+      inputsError.phone = "Phone không được để trống";
+      isSubmit = false;
+    }
+
+    if (
       values.username === null ||
       values.username === undefined ||
       values.username === ""
@@ -122,7 +132,7 @@ const Register = () => {
     } else {
       if (!validatePassword(values.password)) {
         inputsError.password =
-          "Password phải có ít nhất 8 kí tự, có ít nhất 1 chữ cái viết hoa, có ít nhất 1 chữ số";
+          "Password phải có ít nhất 8 kí tự, ít nhất 1 chữ cái viết hoa, ít nhất 1 chữ số và ít nhất 1 ký tự đặc biệt";
         isSubmit = false;
       }
     }
@@ -151,6 +161,7 @@ const Register = () => {
       setValues({
         ...values,
         fullname: "",
+        phone:"",
         username: "",
         email: "",
         password: "",
@@ -188,6 +199,17 @@ const Register = () => {
               variant="outlined"
               value={values.fullname ? values.fullname : ""}
               onChange={handleOnChange("fullname")}
+            />
+          </FormControl>
+          <FormControl fullWidth sx={{ m: 1 }}>
+            <TextField
+              id="outlined-phone"
+              name="phone"
+              label="Phone"
+              variant="outlined"
+              type={"number"}
+              value={values.phone ? values.phone : ""}
+              onChange={handleOnChange("phone")}
             />
           </FormControl>
           <FormControl fullWidth sx={{ m: 1 }}>
