@@ -43,6 +43,7 @@ const Home = () => {
   };
 
   const setDataForm = async (data) => {
+    console.log(data)
     setOpenLoading(true)
     const res = await createItem(data, token);
     if (res && res.status === 200) {

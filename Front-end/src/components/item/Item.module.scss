@@ -21,6 +21,10 @@
   font-weight: 500;
   color: #c3b5cd;
   padding: 10px 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inherit;
 }
 .right {
   display: flex;
@@ -30,7 +34,7 @@
   }
 }
 .left {
-  display: flex; 
+  display: flex;
   flex-direction: column;
   gap: 5px;
 }

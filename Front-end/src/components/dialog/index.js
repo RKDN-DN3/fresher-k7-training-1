@@ -34,12 +34,13 @@ export default function DialogModal(props) {
     };
 
     const handleSubmit = () => {
-        const timeFormat = moment(endTime).format();
+        // const timeFormat = moment(endTime).format();
+        // const timeFormat = moment(endTime).startOf('day');
         if (typeof (setDataForm) === "function") {
             const object = {
-                endDate: timeFormat,
                 title,
                 description: des,
+                endDate: endTime,
                 startDate: startTime
             }
             if (item && item.id) {

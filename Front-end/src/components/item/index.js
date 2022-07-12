@@ -71,16 +71,17 @@ const Item = (props) => {
     }
   }
   const handleRemoveItemOutHome = async () => {
-    setOpenIconLoading(true)
-    const itemData = item;
-    itemData.status = 2;
-    const res = await editItem(itemData, token)
-    if (res && res.status === 200) {
-      setOpenIconLoading(false)
-      props.handleFetchData()
-    } else {
-      toast.error("Was an err!")
-    }
+    // setOpenIconLoading(true)
+    // const itemData = item;
+    // itemData.status = 2;
+    // const res = await editItem(itemData, token)
+    // if (res && res.status === 200) {
+    //   setOpenIconLoading(false)
+    //   props.handleFetchData()
+    // } else {
+    //   toast.error("Was an err!")
+    // }
+    console.log(item)
   }
   return (
     <>
@@ -89,9 +90,9 @@ const Item = (props) => {
           <div className={styles.title}>{item.title}</div>
           <div className={styles.content}>{item.description}</div>
           <div className={styles.date}>
-            <div className={styles.time}>{moment(item.startDate).add(10, 'days').calendar()}</div>
+            <div className={styles.time}>{moment(item.startDate).format('MM/DD/YYYY')}</div>
             <span className={styles.space}>&#8594;</span>
-            <div className={styles.time}>{moment(item.endDate).add(10, 'days').calendar()}</div>
+            <div className={styles.time}>{moment(item.endDate).format('MM/DD/YYYY')}</div>
           </div>
           {props.disableAction === true ?
             '' :
