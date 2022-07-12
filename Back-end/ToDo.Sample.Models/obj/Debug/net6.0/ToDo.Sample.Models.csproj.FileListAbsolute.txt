@@ -10,3 +10,15 @@ E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Mod
 E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Debug\net6.0\refint\ToDo.Sample.Models.dll
 E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.pdb
 E:\C#\API\Sample\ToDo.Sample\ToDo.Sample.Models\obj\Debug\net6.0\ref\ToDo.Sample.Models.dll
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\bin\Debug\net6.0\ToDo.Sample.Models.deps.json
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\bin\Debug\net6.0\ToDo.Sample.Models.dll
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\bin\Debug\net6.0\ToDo.Sample.Models.pdb
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.csproj.AssemblyReference.cache
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.AssemblyInfoInputs.cache
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.AssemblyInfo.cs
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.csproj.CoreCompileInputs.cache
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.dll
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\refint\ToDo.Sample.Models.dll
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ToDo.Sample.Models.pdb
+D:\API\fresher-k7-training-1\Back-end\ToDo.Sample.Models\obj\Debug\net6.0\ref\ToDo.Sample.Models.dll
