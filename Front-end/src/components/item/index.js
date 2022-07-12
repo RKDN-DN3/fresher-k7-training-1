@@ -1,9 +1,6 @@
 import React from 'react'
 import styles from './Item.module.scss'
 import MoreIconDropDown from '../moreIconDropDown';
-import { Button } from '@mui/material';
-import { useDispatch } from 'react-redux'
-import { checkItem, removeTask } from '../../store/todoSlice';
 import CheckIcon from '@mui/icons-material/Check';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,14 +9,14 @@ import moment from 'moment';
 import { deleteItem, editItem } from '../../services';
 import { toast } from 'react-toastify';
 import BackdropLoading from '../backDrop';
-import { token }from '../../util/getTokenLocal';
+import { token } from '../../util/getTokenLocal';
+import ButtonIconLoading from '../buttonIconLoading';
 
 const Item = (props) => {
 
   const [openDialog, setOpenDialog] = React.useState(false);
   const [openLoading, setOpenLoading] = React.useState(false);
-
-  const dispatch = useDispatch();
+  const [openIconLoading, setOpenIconLoading] = React.useState(false);
 
   const { item } = props;
 
@@ -52,10 +49,40 @@ const Item = (props) => {
     }
   }
 
-  const handleCheckItem = () => {
-    dispatch(checkItem(item))
+  const handleStatusItem = async () => {
+    setOpenIconLoading(true)
+    const itemData = item;
+    switch (itemData.status) {
+      case 0:
+        itemData.status = 1;
+        break;
+      case 1:
+        itemData.status = 0;
+        break;
+      default:
+        break;
+    }
+    console.log(itemData)
+    const res = await editItem(itemData, token)
+    if (res && res.status === 200) {
+      setOpenIconLoading(false)
+      props.handleFetchData()
+    } else {
+      toast.error("Was an err!")
+    }
   }
-
+  const handleRemoveItemOutHome = async () => {
+    setOpenIconLoading(true)
+    const itemData = item;
+    itemData.status = 2;
+    const res = await editItem(itemData, token)
+    if (res && res.status === 200) {
+      setOpenIconLoading(false)
+      props.handleFetchData()
+    } else {
+      toast.error("Was an err!")
+    }
+  }
   return (
     <>
       <div className={styles.item}>
@@ -66,20 +93,32 @@ const Item = (props) => {
           {props.disableAction === true ?
             '' :
             <div className={styles.actions}>
-              <Button
-                variant='contained'
-                className={item.status === 1 ? styles.btnDone : styles.btnCheck}
-                onClick={handleCheckItem}
-              >
-                {item.status === 1 ? <AutorenewIcon /> : <CheckIcon />}
-              </Button>
+              {item.status === 1 ?
+                <ButtonIconLoading
+                  openIconLoading={openIconLoading}
+                  variant='contained'
+                  className={item.status === 1 ? styles.btnDone : styles.btnCheck}
+                  onClick={handleStatusItem}
+                >
+                  <AutorenewIcon />
+                </ButtonIconLoading>
+                :
+                <ButtonIconLoading
+                  openIconLoading={openIconLoading}
+                  variant='contained'
+                  className={item.status === 1 ? styles.btnDone : styles.btnCheck}
+                  onClick={handleStatusItem}
+                >
+                  <CheckIcon />
+                </ButtonIconLoading>}
               {item.status === 1 &&
-                <Button
+                <ButtonIconLoading
                   variant='contained'
                   className={styles.btnRemove}
-                  onClick={() => dispatch(removeTask(item))}
-                ><DeleteIcon /></Button>
-              }
+                  onClick={handleRemoveItemOutHome}
+                >
+                  <DeleteIcon />
+                </ButtonIconLoading>}
             </div>
           }
         </div>

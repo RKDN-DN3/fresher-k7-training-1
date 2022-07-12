@@ -2912,11 +2912,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
+      "projectUniqueName": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
       "projectName": "ToDo.Sample.Models",
-      "projectPath": "D:\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
+      "projectPath": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\ToDo.Sample.Models.csproj",
       "packagesPath": "C:\\Users\\QuangLB\\.nuget\\packages\\",
-      "outputPath": "D:\\Sample\\ToDo.Sample\\ToDo.Sample.Models\\obj\\",
+      "outputPath": "D:\\API\\fresher-k7-training-1\\Back-end\\ToDo.Sample.Models\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\QuangLB\\AppData\\Roaming\\NuGet\\NuGet.Config",
