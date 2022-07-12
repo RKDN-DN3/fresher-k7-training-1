@@ -17,6 +17,11 @@ const pages = [
 
 const Header = () => {
   const isLogin = localStorage.getItem("isLogin");
+  const userName =
+    localStorage.getItem("userName") !== null
+      ? localStorage.getItem("userName")
+      : "";
+
   return (
     <AppBar position="static" className={styles.container}>
       <Container maxWidth="md">
@@ -68,7 +73,8 @@ const Header = () => {
                 </Button>
               ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex", alignItems: 'center' } }}>
+            <div style={{"color":"#fffff"}}>{`Hello: ${userName}!`}</div>
             <MenuUser />
           </Box>
         </Toolbar>

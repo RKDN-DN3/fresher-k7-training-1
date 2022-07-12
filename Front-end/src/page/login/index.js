@@ -77,12 +77,14 @@ function Login() {
         emailOrUserName: values.username,
         password: values.password,
       });
+      
       setOpenLoading(true);
       loginUser(userLogin)
         .then((res) => {
           if (res.data.token) {
             localStorage.setItem("tokenUserLogin", res.data.token);
             localStorage.setItem("isLogin", true);
+            localStorage.setItem("userName", values.username)
             window.location.reload();
             navigate("/");
             setOpenLoading(false);
