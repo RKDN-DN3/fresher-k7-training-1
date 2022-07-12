@@ -62,7 +62,6 @@ const Item = (props) => {
       default:
         break;
     }
-    console.log(itemData)
     const res = await editItem(itemData, token)
     if (res && res.status === 200) {
       setOpenIconLoading(false)
@@ -89,7 +88,11 @@ const Item = (props) => {
         <div className={styles.left}>
           <div className={styles.title}>{item.title}</div>
           <div className={styles.content}>{item.description}</div>
-          <div className={styles.time}>{moment(item.endDate).format("MMM Do YY")}</div>
+          <div className={styles.date}>
+            <div className={styles.time}>{moment(item.startDate).add(10, 'days').calendar()}</div>
+            <span className={styles.space}>&#8594;</span>
+            <div className={styles.time}>{moment(item.endDate).add(10, 'days').calendar()}</div>
+          </div>
           {props.disableAction === true ?
             '' :
             <div className={styles.actions}>

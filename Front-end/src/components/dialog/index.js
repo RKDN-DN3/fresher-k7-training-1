@@ -15,6 +15,7 @@ import styles from './DialogModal.module.scss'
 export default function DialogModal(props) {
     const { open, setOpen, setDataForm, item } = props;
     const [endTime, setEndTime] = React.useState(null);
+    const [startTime, setStartTime] = React.useState(new Date());
     const [title, setTitle] = React.useState('');
     const [des, setDes] = React.useState('');
 
@@ -39,13 +40,18 @@ export default function DialogModal(props) {
                 endDate: timeFormat,
                 title,
                 description: des,
+                startDate: startTime
             }
             if (item && item.id) {
-                setDataForm({ ...object, id: item.id, startDate: item.startDate })
+                setDataForm({
+                    ...object,
+                    id: item.id,
+                    startDate: item.startDate,
+                    status: item.status
+                })
             } else {
                 setDataForm(object)
             }
-            console.log(object)
         }
     }
     return (
@@ -80,7 +86,18 @@ export default function DialogModal(props) {
                     />
                 </div>
                 <div className={styles.formInput}>
-                    <span>End Time</span>
+                    <span>Start Date</span>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            label="Time"
+                            value={startTime}
+                            onChange={(newValue) => {
+                                setStartTime(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                    <span>End Date</span>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="Time"

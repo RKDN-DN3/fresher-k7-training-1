@@ -3,8 +3,8 @@ import { MenuItem, Select as SelectNonOutline } from '@mui/material'
 import styles from './Select.module.scss';
 const options = [
     { title: 'All', value: 3 },
-    { title: 'Unfinished', value: 0 },
-    { title: 'Success', value: 1 },
+    { title: 'Unexecuted ', value: 0 },
+    { title: 'Done', value: 1 },
 ]
 
 const Select = (props) => {

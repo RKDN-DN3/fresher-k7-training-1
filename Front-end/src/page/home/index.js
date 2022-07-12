@@ -22,7 +22,6 @@ const Home = () => {
       if (res.data && res.data.isSuccess === true) {
         const data = res.data.result;
         const arr = data.filter((item) => item.status !== 2)
-        console.log(arr)
         setListTodo(arr)
         setOpenLoading(false)
       }
