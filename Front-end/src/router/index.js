@@ -2,7 +2,6 @@ import Home from "../page/home";
 import Register from "../page/register";
 import History from "../page/history";
 import Login from "../page/login";
-import { token } from "../util/getTokenLocal";
 
 const publicRouters = [
   {

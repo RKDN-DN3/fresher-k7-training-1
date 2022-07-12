@@ -3,13 +3,13 @@ import styles from './Item.module.scss'
 import MoreIconDropDown from '../moreIconDropDown';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux'
-import { updateData, checkItem, removeTask } from '../../store/todoSlice';
+import { checkItem, removeTask } from '../../store/todoSlice';
 import CheckIcon from '@mui/icons-material/Check';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '../dialog';
 import moment from 'moment';
-import { deleteItem } from '../../services';
+import { deleteItem, editItem } from '../../services';
 import { toast } from 'react-toastify';
 import BackdropLoading from '../backDrop';
 import { token }from '../../util/getTokenLocal';
@@ -39,8 +39,17 @@ const Item = (props) => {
     setOpenDialog(true)
   }
 
-  const setDataForm = (data) => {
-    dispatch(updateData({ data, type: 'edit' }))
+  const setDataForm = async (data) => {
+    setOpenLoading(true)
+    const res = await editItem(data, token)
+    if (res && res.status === 200) {
+      props.handleFetchData()
+      toast.success("Your was edit success!")
+      setOpenLoading(false)
+      setOpenDialog(false)
+    } else {
+      toast.error("Was an err!")
+    }
   }
 
   const handleCheckItem = () => {
