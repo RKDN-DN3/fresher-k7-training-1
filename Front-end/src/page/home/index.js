@@ -8,7 +8,7 @@ import DialogModal from "../../components/dialog";
 import { getAllItem, createItem } from '../../services';
 import { toast } from 'react-toastify';
 import BackdropLoading from "../../components/backDrop";
-import  { token } from '../../util/getTokenLocal';
+import { token } from '../../util/getTokenLocal';
 
 const Home = () => {
   const [openLoading, setOpenLoading] = React.useState(false);
@@ -20,8 +20,13 @@ const Home = () => {
     const res = await getAllItem(token)
     if (res && res.status === 200) {
       if (res.data && res.data.isSuccess === true) {
-        const object = res.data.result
-        setListTodo(object)
+        const data = res.data.result;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].status === 2) {
+            data.splice(i)
+          }
+        }
+        setListTodo(data)
         setOpenLoading(false)
       }
     }
@@ -33,7 +38,8 @@ const Home = () => {
   }, [])
 
   React.useEffect(() => {
-    setListTodoSearch([...listTodo].reverse())
+    const data = [...listTodo]
+    setListTodoSearch(data.reverse())
   }, [listTodo]);
 
   const handleClickOpen = () => {
@@ -76,9 +82,6 @@ const Home = () => {
       </div>
       <div className={styles.content}>
         {listTodoSearch?.map((item, i) => {
-          if (item.status === 2) {
-            listTodoSearch.splice(i, 1)
-          }
           return (
             <Item
               key={i}
@@ -93,7 +96,7 @@ const Home = () => {
         setOpen={setOpen}
         setDataForm={setDataForm}
       />
-      <BackdropLoading openLoading={openLoading}/>
+      <BackdropLoading openLoading={openLoading} />
     </div>
   )
 }

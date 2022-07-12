@@ -2,20 +2,40 @@ import React from 'react'
 import styles from './History.module.scss';
 import Filter from "../../components/filter/Filter";
 import Item from "../../components/item";
-import { useSelector } from 'react-redux';
+import BackdropLoading from "../../components/backDrop";
+import { getAllItem } from '../../services';
+import { token } from '../../util/getTokenLocal';
 
 const History = () => {
+  const [openLoading, setOpenLoading] = React.useState(false);
   const [listTodo, setListTodo] = React.useState([]);
   const [listTodoSearch, setListTodoSearch] = React.useState([]);
-  const dataTodo = useSelector((state) => state.todo.data)
+
+  const handleFetchData = async () => {
+    const res = await getAllItem(token)
+    if (res && res.status === 200) {
+      if (res.data && res.data.isSuccess === true) {
+        const data = [];
+        for (let i = 0; i <  res.data.result.length; i++) {
+          if (res.data.result[i].status === 2) {
+            data.push(res.data.result[i])
+          }
+        }
+        setListTodo(data)
+        setOpenLoading(false)
+      }
+    }
+  }
 
   React.useEffect(() => {
-    setListTodoSearch([...dataTodo].reverse())
-  }, [dataTodo]);
+    setOpenLoading(true)
+    handleFetchData()
+  }, []);
 
   React.useEffect(() => {
-    setListTodo([...dataTodo].reverse())
-  }, [dataTodo]);
+    const data = [...listTodo]
+    setListTodoSearch(data.reverse())
+  }, [listTodo]);
 
 
   return (
@@ -32,17 +52,15 @@ const History = () => {
       <div className={styles.content}>
         {listTodoSearch?.map((item, i) => {
           return (
-            <div key={i}>
-              {item.status === 2 &&
-                <Item
-                  item={item}
-                  disableAction
-                />
-              }
-            </div>
+            <Item
+              key={i}
+              item={item}
+              disableAction
+            />
           )
         })}
       </div>
+      <BackdropLoading openLoading={openLoading} />
     </div>
   )
 }
