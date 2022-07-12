@@ -22,6 +22,7 @@ const MenuUser = () => {
     const handleLogout = () => {
         window.localStorage.removeItem('tokenUserLogin');
         window.localStorage.removeItem('isLogin');
+        window.localStorage.removeItem('userName');
         navigate("/");
         window.location.reload();
     }
