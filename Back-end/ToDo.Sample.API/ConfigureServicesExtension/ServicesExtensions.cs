@@ -58,6 +58,7 @@ namespace ToDo.Sample.API.ConfigureServicesExtension
                     ValidIssuer = jwtSettings.GetSection("Issuer").Value,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                 };
+                //pass token jwt from client
             });
 
         }
