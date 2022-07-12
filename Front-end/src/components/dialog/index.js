@@ -36,13 +36,16 @@ export default function DialogModal(props) {
         const timeFormat = moment(endTime).format();
         if (typeof (setDataForm) === "function") {
             const object = {
-                id: item.id,
                 endDate: timeFormat,
                 title,
                 description: des,
-                startDate: item.startDate
             }
-            setDataForm(object)
+            if (item && item.id) {
+                setDataForm({ ...object, id: item.id, startDate: item.startDate })
+            } else {
+                setDataForm(object)
+            }
+            console.log(object)
         }
     }
     return (

@@ -20,11 +20,16 @@ const editItem = (data, token) => {
   return axiosClient.put('/api/todos/update-todo', data, { headers: { "Authorization": `Bearer ${token}` } })
 }
 
+const registerUser = (userRegister) => {
+  return axiosClient.post('/api/user/Register',userRegister);
+}
+
 
 export {
   getAllItem,
   createItem,
   loginUser,
   deleteItem,
-  editItem
+  editItem,
+  registerUser
 }

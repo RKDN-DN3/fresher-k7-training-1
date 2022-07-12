@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ToDo.Sample.API.ConfigureServicesExtension;
 using ToDo.Sample.DataAccess.Data;
-using ToDo.Sample.DataAccess.Hubs;
 using ToDo.Sample.DataAccess.Initializer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,8 +26,6 @@ builder.Services.AddCors(o =>
     .AllowAnyMethod()
     .AllowAnyHeader());
 });
-
-builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -56,7 +53,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapHub<UserHub>("/hubs/userCount");
 
 app.Run();

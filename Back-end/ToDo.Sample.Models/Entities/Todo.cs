@@ -10,6 +10,7 @@ namespace ToDo.Sample.Models.Entities
         [MaxLength(100)]
         public string? Title { get; set; }
         public string? Description { get; set; }
+        public int Status { get; set; } = 0;
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         [Required]
