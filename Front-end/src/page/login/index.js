@@ -21,8 +21,8 @@ function Login() {
 
   const [values, setValues] = useState({
     showPassword: false,
-    username: 'adminuser',
-    password: '@Abc123'
+    username: "adminuser",
+    password: "@Abc123",
   });
   const [errors, setErrors] = useState({});
 
@@ -53,7 +53,7 @@ function Login() {
     ) {
       inputsError.username = "Username không được để trống";
       isSubmit = false;
-      setOpenLoading(false)
+      setOpenLoading(false);
     }
 
     if (
@@ -77,14 +77,15 @@ function Login() {
         emailOrUserName: values.username,
         password: values.password,
       });
-      setOpenLoading(true)
+      setOpenLoading(true);
       loginUser(userLogin)
         .then((res) => {
           if (res.data.token) {
             localStorage.setItem("tokenUserLogin", res.data.token);
+            localStorage.setItem("isLogin", true);
             window.location.reload();
             navigate("/");
-            setOpenLoading(false)
+            setOpenLoading(false);
           }
         })
         .catch((err) => console.log(err));
@@ -96,7 +97,7 @@ function Login() {
       <div className={styles.header}>
         <h1>Login</h1>
       </div>
-      <div style={{color: "red"}}>Demo with default user and password</div>
+      <div style={{ color: "red" }}>Demo with default user and password</div>
       <div className={styles.content}>
         <FormControl fullWidth sx={{ m: 1 }}>
           <FormError errors={errors} />
@@ -145,7 +146,7 @@ function Login() {
           </FormControl>
         </form>
       </div>
-      <BackdropLoading openLoading={openLoading}/>
+      <BackdropLoading openLoading={openLoading} />
     </div>
   );
 }
