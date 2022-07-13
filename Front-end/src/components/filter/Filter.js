@@ -3,7 +3,7 @@ import React from 'react'
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import styles from './Filter.module.scss'
 import Select from '../select'
-
+import moment from 'moment'
 const Filter = ({ listTodo, setListTodoSearch }) => {
 
     const [valueInput, setValueInput] = React.useState('')
@@ -13,7 +13,9 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
             setValueInput(e.target.value)
             let matchingStrings = [];
             listTodo.forEach((list) => {
-                if (`${list.title}${list.des}}${list.endTime}`.toLocaleLowerCase().search(valueInput.toLocaleLowerCase()) > -1) {
+                const startDate = moment(list.startDate).format('MM/DD/YYYY');
+                const ednDate = moment(list.endDate).format('MM/DD/YYYY');
+                if (`${list.title}${list.des}}${startDate}${ednDate}`.toLocaleLowerCase().search(valueInput.toLocaleLowerCase()) > -1) {
                     matchingStrings.push(list)
                 }
             })

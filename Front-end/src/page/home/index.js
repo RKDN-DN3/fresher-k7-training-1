@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import BackdropLoading from "../../components/backDrop";
 import { token } from '../../util/getTokenLocal';
 import { checkTokenExpirationMiddleware } from "../../util/checkToken";
+import NotFoundTodo from "../../components/notFoundTodo";
 
 const Home = () => {
   const [openLoading, setOpenLoading] = React.useState(false);
@@ -79,15 +80,21 @@ const Home = () => {
         />
       </div>
       <div className={styles.content}>
-        {listTodoSearch?.map((item, i) => {
-          return (
-            <Item
-              key={i}
-              item={item}
-              handleFetchData={handleFetchData}
-            />
-          )
-        })}
+        {listTodoSearch.length === 0 ?
+          <NotFoundTodo>There are no todos</NotFoundTodo>:
+          <>
+            {listTodoSearch?.map((item, i) => {
+              return (
+                <Item
+                  key={i}
+                  item={item}
+                  handleFetchData={handleFetchData}
+                />
+              )
+            })}
+          </>
+        }
+
       </div>
       <DialogModal
         open={open}

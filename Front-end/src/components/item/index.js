@@ -84,6 +84,7 @@ const Item = (props) => {
     if (res && res.status === 200) {
       setOpenIconLoading(false)
       props.handleFetchData()
+      toast.warning("Todo added to history!")
     } else {
       toast.error("Was an err!")
     }
