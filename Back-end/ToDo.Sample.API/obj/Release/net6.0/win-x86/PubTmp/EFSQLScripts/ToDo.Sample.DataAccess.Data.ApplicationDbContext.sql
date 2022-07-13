@@ -188,3 +188,22 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220711154642_AddColumnStatusToTodos')
+BEGIN
+    ALTER TABLE [Todos] ADD [Status] int NOT NULL DEFAULT 0;
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20220711154642_AddColumnStatusToTodos')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20220711154642_AddColumnStatusToTodos', N'6.0.6');
+END;
+GO
+
+COMMIT;
+GO
+

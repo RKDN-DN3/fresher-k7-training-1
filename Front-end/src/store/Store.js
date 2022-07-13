@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from "./todoSlice";
+import reduxSlice from "./todoSlice";
 export const store = configureStore({
   reducer: {
-    todo: userReducer
+    todo: reduxSlice,
   },
 })

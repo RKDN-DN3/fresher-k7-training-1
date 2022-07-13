@@ -12,8 +12,8 @@ using ToDo.Sample.DataAccess.Data;
 namespace ToDo.Sample.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220712070948_AddColumnToTodos")]
-    partial class AddColumnToTodos
+    [Migration("20220711154642_AddColumnStatusToTodos")]
+    partial class AddColumnStatusToTodos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

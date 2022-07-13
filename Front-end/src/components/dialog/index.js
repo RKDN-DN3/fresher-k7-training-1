@@ -12,9 +12,12 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import moment from 'moment';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './DialogModal.module.scss'
+
+
 export default function DialogModal(props) {
     const { open, setOpen, setDataForm, item } = props;
     const [endTime, setEndTime] = React.useState(null);
+    const [startTime, setStartTime] = React.useState(new Date());
     const [title, setTitle] = React.useState('');
     const [des, setDes] = React.useState('');
 
@@ -33,19 +36,25 @@ export default function DialogModal(props) {
     };
 
     const handleSubmit = () => {
-        const timeFormat = moment(endTime).format();
+        const localTime = moment(endTime).format('YYYY-MM-DD');
+        const proposedDate = localTime + "T00:00:00.000Z";
+        console.log(proposedDate)
         if (typeof (setDataForm) === "function") {
             const object = {
-                endDate: timeFormat,
                 title,
                 description: des,
+                endDate: proposedDate,
+                startDate: startTime
             }
             if (item && item.id) {
-                setDataForm({ ...object, id: item.id, startDate: item.startDate })
+                setDataForm({
+                    ...object,
+                    id: item.id,
+                    status: item.status
+                })
             } else {
                 setDataForm(object)
             }
-            console.log(object)
         }
     }
     return (
@@ -80,7 +89,18 @@ export default function DialogModal(props) {
                     />
                 </div>
                 <div className={styles.formInput}>
-                    <span>End Time</span>
+                    <span>Start Date</span>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            label="Time"
+                            value={startTime}
+                            onChange={(newValue) => {
+                                setStartTime(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
+                    <span>End Date</span>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="Time"

@@ -4,7 +4,7 @@
 
 namespace ToDo.Sample.DataAccess.Migrations
 {
-    public partial class AddColumnToTodos : Migration
+    public partial class AddColumnStatusToTodos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

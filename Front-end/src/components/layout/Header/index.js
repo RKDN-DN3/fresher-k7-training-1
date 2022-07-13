@@ -17,6 +17,11 @@ const pages = [
 
 const Header = () => {
   const isLogin = localStorage.getItem("isLogin");
+  const userName =
+    localStorage.getItem("userName") !== null
+      ? localStorage.getItem("userName")
+      : "";
+
   return (
     <AppBar position="static" className={styles.container}>
       <Container maxWidth="md">
@@ -60,15 +65,22 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {isLogin === "true" &&
               pages.map((item, i) => (
-                <Button
-                  key={i}
-                  style={{ my: 2, color: "white", display: "block" }}
-                >
-                  <Link to={item.path}> {item.title}</Link>
-                </Button>
+                <Link to={item.path} key={i}>
+                  <Button style={{ my: 2, color: "white", display: "block" }}>
+                    {item.title}
+                  </Button>
+                </Link>
               ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            sx={{
+              flexGrow: 0,
+              display: { xs: "none", md: "flex", alignItems: "center" },
+            }}
+          >
+            {isLogin === "true" && (
+              <div style={{ color: "#fffff" }}>{`Hello: ${userName}!`}</div>
+            )}
             <MenuUser />
           </Box>
         </Toolbar>

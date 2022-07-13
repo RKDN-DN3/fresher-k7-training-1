@@ -9,6 +9,7 @@ import { getAllItem, createItem } from '../../services';
 import { toast } from 'react-toastify';
 import BackdropLoading from "../../components/backDrop";
 import { token } from '../../util/getTokenLocal';
+import { checkTokenExpirationMiddleware } from "../../util/checkToken";
 
 const Home = () => {
   const [openLoading, setOpenLoading] = React.useState(false);
@@ -21,18 +22,15 @@ const Home = () => {
     if (res && res.status === 200) {
       if (res.data && res.data.isSuccess === true) {
         const data = res.data.result;
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].status === 2) {
-            data.splice(i)
-          }
-        }
-        setListTodo(data)
+        const arr = data.filter((item) => item.status !== 2)
+        setListTodo(arr)
         setOpenLoading(false)
       }
     }
   }
 
   React.useEffect(() => {
+    checkTokenExpirationMiddleware()
     setOpenLoading(true)
     handleFetchData()
   }, [])

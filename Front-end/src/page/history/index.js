@@ -15,13 +15,9 @@ const History = () => {
     const res = await getAllItem(token)
     if (res && res.status === 200) {
       if (res.data && res.data.isSuccess === true) {
-        const data = [];
-        for (let i = 0; i <  res.data.result.length; i++) {
-          if (res.data.result[i].status === 2) {
-            data.push(res.data.result[i])
-          }
-        }
-        setListTodo(data)
+        const data = res.data.result;
+        const arr = data.filter((item) => item.status === 2)
+        setListTodo(arr)
         setOpenLoading(false)
       }
     }

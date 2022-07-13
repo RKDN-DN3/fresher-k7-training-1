@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="ToDoSample" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^E:\\C\#\\API\\Sample\\ToDo\.Sample\\ToDo\.Sample\.API\\obj\\Release\\net6\.0\\win-x86\\PubTmp\\Out\\$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\API\\fresher-k7-training-1\\Back-end\\ToDo\.Sample\.API\\obj\\Release\\net6\.0\\win-x86\\PubTmp\\Out\\$" />
   </parameter>
   <parameter name="ToDo.Sample.DataAccess.Data.ApplicationDbContext" description="" value="Data Source=tcp:sampletodomasteryserver.database.windows.net,1433;Initial Catalog=sampletodomastery_db;User Id=donet@sampletodomasteryserver;Password=Quang,4179" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^E:\\C\#\\API\\Sample\\ToDo\.Sample\\ToDo\.Sample\.API\\obj\\Release\\net6\.0\\win-x86\\PubTmp\\EFSQLScripts\\ToDo\.Sample\.DataAccess\.Data\.ApplicationDbContext\.sql$" />
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\API\\fresher-k7-training-1\\Back-end\\ToDo\.Sample\.API\\obj\\Release\\net6\.0\\win-x86\\PubTmp\\EFSQLScripts\\ToDo\.Sample\.DataAccess\.Data\.ApplicationDbContext\.sql$" />
   </parameter>
 </parameters>
