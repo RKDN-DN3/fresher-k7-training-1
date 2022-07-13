@@ -13,7 +13,17 @@
       color: rgb(211, 210, 210);
     }
   }
+  :global(.active) {
+    background-color: white;
+    .btnLink {
+      color: var(--color-text) !important;
+    }
+    
+  }
 }
 .link {
   min-height: 64px;
+}
+.btnLink {
+  height: 100%;
 }
