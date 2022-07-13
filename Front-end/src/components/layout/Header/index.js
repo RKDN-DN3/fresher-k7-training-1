@@ -46,7 +46,7 @@ const Header = () => {
           </Link>
           <Box
             className={styles.link}
-            sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+            sx={{ flexGrow: 1, display: { xs: "none", md: "flex", alignItems:"center" } }}
           >
             {isLogin === "true" &&
               pages.map((item, i) => (
