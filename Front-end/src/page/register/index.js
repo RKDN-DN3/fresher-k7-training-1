@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import styles from "./Register.module.scss";
 import FormError from "../../components/formError";
 import { registerUser } from "../../services";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import BackdropLoading from "../../components/backDrop";
 
 const Register = () => {
@@ -289,6 +289,12 @@ const Register = () => {
             <Button type="submit" variant="contained">
               Register
             </Button>
+          </FormControl>
+
+          <FormControl fullWidth sx={{m:1}}>
+              <p style={{"margin":"0 auto"}}>
+                Have already an account? <Link to="/login" style={{"color":"#000","fontWeight":600}}> Login now</Link>
+              </p>
           </FormControl>
         </form>
       </div>

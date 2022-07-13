@@ -15,6 +15,7 @@ import FormError from "../../components/formError";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services";
 import BackdropLoading from "../../components/backDrop";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [openLoading, setOpenLoading] = React.useState(false);
@@ -77,14 +78,14 @@ function Login() {
         emailOrUserName: values.username,
         password: values.password,
       });
-      
+
       setOpenLoading(true);
       loginUser(userLogin)
         .then((res) => {
           if (res.data.token) {
             localStorage.setItem("tokenUserLogin", res.data.token);
             localStorage.setItem("isLogin", true);
-            localStorage.setItem("userName", values.username)
+            localStorage.setItem("userName", values.username);
             window.location.reload();
             navigate("/");
             setOpenLoading(false);
@@ -145,6 +146,15 @@ function Login() {
             <Button type="submit" variant="contained">
               Login
             </Button>
+          </FormControl>
+
+          <FormControl fullWidth sx={{m:1}}>
+            <p style={{"marginLeft":"auto"}}>
+              Not a member? 
+              <Link to="/register" style={{ color: "#000", fontWeight: 600 }}>
+                Sign up now
+              </Link>
+            </p>
           </FormControl>
         </form>
       </div>
