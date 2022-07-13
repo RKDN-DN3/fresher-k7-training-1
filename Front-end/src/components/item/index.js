@@ -11,7 +11,8 @@ import { toast } from 'react-toastify';
 import BackdropLoading from '../backDrop';
 import { token } from '../../util/getTokenLocal';
 import ButtonIconLoading from '../buttonIconLoading';
-
+import { checkDateToDoOutDate } from '../../util/checkDateToDoOutDate';
+import clsx from 'clsx'
 
 const Item = (props) => {
 
@@ -22,8 +23,20 @@ const Item = (props) => {
   const { item } = props;
 
   React.useEffect(() => {
-    
-  }, []);
+    if (item.status !== 3) {
+      const fetchItemOutDate = async () => {
+        const data = await checkDateToDoOutDate(item);
+        data.status = 3;
+        const res = await editItem(data, token);
+        if (res && res.status === 200) {
+          toast.warning("Was todo out date!")
+        } else {
+          toast.error("Was an err!")
+        }
+      }
+      fetchItemOutDate()
+    }
+  }, [item]);
 
   const handleDeleteItem = async () => {
     setOpenLoading(true)
@@ -92,16 +105,25 @@ const Item = (props) => {
 
   return (
     <>
-      <div className={styles.item}>
+      <div className={clsx(styles.item, item.status === 3 && styles.outDate)}>
         <div className={styles.left}>
           <div className={styles.title}>{item.title}</div>
           <div className={styles.content}>{item.description}</div>
           <div className={styles.date}>
-            <div className={styles.time}>{moment(item.startDate).format('MM/DD/YYYY')}</div>
+            <div className={styles.time}>
+              {moment(item.startDate).format('MM/DD/YYYY')}
+            </div>
             <span className={styles.space}>&#8594;</span>
-            <div className={styles.time}>{moment(item.endDate).format('MM/DD/YYYY')}</div>
+            <div className={styles.time}
+              style={{  color: item.status === 3 && 'red' }}
+            >
+              {moment(item.endDate).format('MM/DD/YYYY')}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {item.status === 3 && <span>Tasks out date</span>}
+            </div>
+            
           </div>
-          {props.disableAction === true ?
+          {props.disableAction === true || item.status === 3 ?
             '' :
             <div className={styles.actions}>
               {item.status === 1 ?

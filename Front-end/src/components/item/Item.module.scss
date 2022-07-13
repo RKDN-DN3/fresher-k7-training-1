@@ -71,3 +71,9 @@
 .space {
   color: black;
 }
+.outDate {
+  opacity: 0.4;
+  &:hover {
+    border-color: transparent !important;
+  }
+}
