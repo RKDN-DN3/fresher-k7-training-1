@@ -5,6 +5,7 @@ import Item from "../../components/item";
 import BackdropLoading from "../../components/backDrop";
 import { getAllItem } from '../../services';
 import { token } from '../../util/getTokenLocal';
+import NotFoundTodo from '../../components/notFoundTodo';
 
 const History = () => {
   const [openLoading, setOpenLoading] = React.useState(false);
@@ -47,16 +48,21 @@ const History = () => {
         />
       </div>
       <div className={styles.content}>
-        {listTodoSearch?.map((item, i) => {
-          return (
-            <Item
-              key={i}
-              item={item}
-              disableAction
-              handleFetchData={handleFetchData}
-            />
-          )
-        })}
+        {listTodoSearch.length === 0 ?
+          <NotFoundTodo>There are no todos</NotFoundTodo> :
+          <>
+            {listTodoSearch?.map((item, i) => {
+              return (
+                <Item
+                  key={i}
+                  item={item}
+                  disableAction
+                  handleFetchData={handleFetchData}
+                />
+              )
+            })}
+          </>
+        }
       </div>
       <BackdropLoading openLoading={openLoading} />
     </div>
