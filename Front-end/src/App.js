@@ -10,9 +10,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFound from "./components/NotFound";
 import Login from "./page/login";
-import { token } from "./util/getTokenLocal";
 
 function App() {
+  const isLogin = localStorage.getItem("isLogin");
   return (
     <GlobalStyle>
       <BrowserRouter>
@@ -21,7 +21,7 @@ function App() {
             let Component = route.component;
             let LayoutRender = DefaultLayout;
             if (route.login) {
-              if (token) {
+              if (isLogin) {
                 Component = route.component
               } else {
                 Component = Login

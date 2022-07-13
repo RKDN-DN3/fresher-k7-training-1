@@ -9,6 +9,7 @@ import { getAllItem, createItem } from '../../services';
 import { toast } from 'react-toastify';
 import BackdropLoading from "../../components/backDrop";
 import { token } from '../../util/getTokenLocal';
+import { checkTokenExpirationMiddleware } from "../../util/checkToken";
 
 const Home = () => {
   const [openLoading, setOpenLoading] = React.useState(false);
@@ -29,6 +30,7 @@ const Home = () => {
   }
 
   React.useEffect(() => {
+    checkTokenExpirationMiddleware()
     setOpenLoading(true)
     handleFetchData()
   }, [])
@@ -43,7 +45,6 @@ const Home = () => {
   };
 
   const setDataForm = async (data) => {
-    console.log(data)
     setOpenLoading(true)
     const res = await createItem(data, token);
     if (res && res.status === 200) {

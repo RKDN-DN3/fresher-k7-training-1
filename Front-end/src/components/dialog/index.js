@@ -12,6 +12,8 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import moment from 'moment';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './DialogModal.module.scss'
+
+
 export default function DialogModal(props) {
     const { open, setOpen, setDataForm, item } = props;
     const [endTime, setEndTime] = React.useState(null);
@@ -36,24 +38,28 @@ export default function DialogModal(props) {
     const handleSubmit = () => {
         const localTime = moment(endTime).format('YYYY-MM-DD');
         const proposedDate = localTime + "T00:00:00.000Z";
-        console.log(proposedDate)
-        if (typeof (setDataForm) === "function") {
-            const object = {
-                title,
-                description: des,
-                endDate: proposedDate,
-                startDate: startTime
-            }
-            if (item && item.id) {
-                setDataForm({
-                    ...object,
-                    id: item.id,
-                    status: item.status
-                })
-            } else {
-                setDataForm(object)
+        if (!endTime || !title || !des) {
+            alert('You missing parameter')
+        } else {
+            if (typeof (setDataForm) === "function") {
+                const object = {
+                    title,
+                    description: des,
+                    endDate: proposedDate,
+                    startDate: startTime
+                }
+                if (item && item.id) {
+                    setDataForm({
+                        ...object,
+                        id: item.id,
+                        status: item.status
+                    })
+                } else {
+                    setDataForm(object)
+                }
             }
         }
+
     }
     return (
         <Dialog

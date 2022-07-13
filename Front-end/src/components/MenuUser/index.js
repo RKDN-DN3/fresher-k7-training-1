@@ -4,10 +4,10 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom'
-import { token } from '../../util/getTokenLocal'
 import { useNavigate } from "react-router-dom";
 
 const MenuUser = () => {
+    const isLogin = localStorage.getItem("isLogin");
     const [anchorEl, setAnchorEl] = React.useState(null);
     const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ const MenuUser = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        {!token &&
+                        {!isLogin &&
                             <MenuItem onClick={handleClose}>
                                 <Link
                                     to='/register'
@@ -59,7 +59,7 @@ const MenuUser = () => {
                                 >Register</Link>
                             </MenuItem>
                         }
-                        {!token ?
+                        {!isLogin ?
                             <MenuItem onClick={handleClose}>
                                 <Link
                                     to='/login'
