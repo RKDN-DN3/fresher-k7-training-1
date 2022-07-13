@@ -44,6 +44,10 @@ export default function DialogModal(props) {
             isValid = true
             inputsError.endTime = 'Missing end Date'
         }
+        if (!startTime) {
+            isValid = true
+            inputsError.startTime = 'Missing start Date'
+        }
         if (!des) {
             isValid = true
             inputsError.des = 'Missing description'
@@ -103,7 +107,7 @@ export default function DialogModal(props) {
                     <FormError errors={errors} />
                     <span>
                         Title
-                        <span style={{ color: 'red' }}> &#x2a;</span>
+                        <span> &#x2a;</span>
                     </span>
                     <TextField
                         id="outlined-basic"
@@ -116,7 +120,7 @@ export default function DialogModal(props) {
                 <div className={styles.formInput}>
                     <span>
                         Description
-                        <span style={{ color: 'red' }}> &#x2a;</span>
+                        <span> &#x2a;</span>
                     </span>
                     <TextareaAutosize
                         className={styles.area}
@@ -127,7 +131,10 @@ export default function DialogModal(props) {
                     />
                 </div>
                 <div className={styles.formInput}>
-                    <span>Start Date</span>
+                    <span>
+                        Start Date
+                        <span> &#x2a;</span>
+                    </span>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="Time"
@@ -142,7 +149,7 @@ export default function DialogModal(props) {
                     </LocalizationProvider>
                     <span>
                         End Date
-                        <span style={{ color: 'red' }}> &#x2a;</span>
+                        <span> &#x2a;</span>
                     </span>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
