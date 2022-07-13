@@ -12,6 +12,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import moment from 'moment';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './DialogModal.module.scss'
+import FormError from '../formError';
 
 
 export default function DialogModal(props) {
@@ -20,6 +21,7 @@ export default function DialogModal(props) {
     const [startTime, setStartTime] = React.useState(new Date());
     const [title, setTitle] = React.useState('');
     const [des, setDes] = React.useState('');
+    const [errors, setErrors] = React.useState({});
 
     React.useEffect(() => {
         if (item) {
@@ -35,13 +37,36 @@ export default function DialogModal(props) {
         setOpen(false);
     };
 
+    const handleValidate = () => {
+        let isValid = false;
+        let inputsError = {}
+        if (!endTime) {
+            isValid = true
+            inputsError.endTime = 'Missing end Date'
+        }
+        if (!startTime) {
+            isValid = true
+            inputsError.startTime = 'Missing start Date'
+        }
+        if (!des) {
+            isValid = true
+            inputsError.des = 'Missing description'
+        }
+        if (!title) {
+            isValid = true
+            inputsError.title = 'Missing title'
+        }
+        setErrors(inputsError)
+        return isValid
+    }
+
     const handleSubmit = () => {
         const localTime = moment(endTime).format('YYYY-MM-DD');
         const proposedDate = localTime + "T00:00:00.000Z";
-        if (!endTime || !title || !des) {
-            alert('You missing parameter')
+        if (handleValidate()) {
+            return
         } else {
-            if(endTime.getTime() <= startTime.getTime()) {
+            if (endTime.getTime() <= startTime.getTime()) {
                 alert('Error: Start date is greater than end date')
             } else {
                 if (typeof (setDataForm) === "function") {
@@ -63,7 +88,7 @@ export default function DialogModal(props) {
                     }
                 }
             }
-            
+
         }
 
     }
@@ -79,7 +104,11 @@ export default function DialogModal(props) {
             </DialogTitle>
             <DialogContent className={styles.form}>
                 <div className={styles.formInput}>
-                    <span>Title</span>
+                    <FormError errors={errors} />
+                    <span>
+                        Title
+                        <span> &#x2a;</span>
+                    </span>
                     <TextField
                         id="outlined-basic"
                         label="Title"
@@ -89,7 +118,10 @@ export default function DialogModal(props) {
                     />
                 </div>
                 <div className={styles.formInput}>
-                    <span>Description</span>
+                    <span>
+                        Description
+                        <span> &#x2a;</span>
+                    </span>
                     <TextareaAutosize
                         className={styles.area}
                         aria-label="empty textarea"
@@ -99,22 +131,31 @@ export default function DialogModal(props) {
                     />
                 </div>
                 <div className={styles.formInput}>
-                    <span>Start Date</span>
+                    <span>
+                        Start Date
+                        <span> &#x2a;</span>
+                    </span>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="Time"
                             value={startTime}
+                            maxDate={endTime}
+                            minDate={new Date()}
                             onChange={(newValue) => {
                                 setStartTime(newValue);
                             }}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
-                    <span>End Date</span>
+                    <span>
+                        End Date
+                        <span> &#x2a;</span>
+                    </span>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="Time"
                             value={endTime}
+                            minDate={startTime}
                             onChange={(newValue) => {
                                 setEndTime(newValue);
                             }}

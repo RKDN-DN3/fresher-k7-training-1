@@ -7,11 +7,11 @@
 .formInput {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 .Dialog {
   :global(.MuiPaper-root) {
-    width: 500px !important;
+    min-width: 500px !important;
   }
 }
 .area {
