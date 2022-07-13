@@ -21,6 +21,10 @@ const Item = (props) => {
 
   const { item } = props;
 
+  React.useEffect(() => {
+    
+  }, []);
+
   const handleDeleteItem = async () => {
     setOpenLoading(true)
     const res = await deleteItem(item.id, token)
@@ -71,6 +75,7 @@ const Item = (props) => {
       toast.error("Was an err!")
     }
   }
+
   const handleRemoveItemOutHome = async () => {
     setOpenIconLoading(true)
     const itemData = item;
@@ -83,6 +88,7 @@ const Item = (props) => {
       toast.error("Was an err!")
     }
   }
+
   return (
     <>
       <div className={styles.item}>
