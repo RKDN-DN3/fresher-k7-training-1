@@ -159,6 +159,7 @@ const Item = (props) => {
           <MoreIconDropDown
             onClick={handleDeleteItem}
             onClickEdit={handleEditItem}
+            disableEdit={item.status === 3 || 2}
           />
         </div>
         <Dialog
