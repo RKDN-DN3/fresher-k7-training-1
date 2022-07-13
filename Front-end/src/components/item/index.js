@@ -42,9 +42,10 @@ const Item = (props) => {
     setOpenLoading(true)
     const res = await deleteItem(item.id, token)
     if (res && res.status === 200) {
+      setOpenLoading(false)
       props.handleFetchData()
       toast.success("Your was delete success!")
-      setOpenLoading(false)
+      console.log('done')
     } else {
       toast.error("Was an err!")
     }
@@ -115,13 +116,13 @@ const Item = (props) => {
             </div>
             <span className={styles.space}>&#8594;</span>
             <div className={styles.time}
-              style={{  color: item.status === 3 && 'red' }}
+              style={{ color: item.status === 3 && 'red' }}
             >
               {moment(item.endDate).format('MM/DD/YYYY')}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               {item.status === 3 && <span>Tasks out date</span>}
             </div>
-            
+
           </div>
           {props.disableAction === true || item.status === 3 ?
             '' :
@@ -159,7 +160,11 @@ const Item = (props) => {
           <MoreIconDropDown
             onClick={handleDeleteItem}
             onClickEdit={handleEditItem}
-            disableEdit={item.status === 3 || 2}
+            disableEdit={
+              item.status === 3
+              ||
+              item.status === 2
+            }
           />
         </div>
         <Dialog

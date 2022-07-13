@@ -43,6 +43,7 @@ const History = () => {
         <Filter
           listTodo={listTodo && listTodo}
           setListTodoSearch={setListTodoSearch}
+          historyPage={true}
         />
       </div>
       <div className={styles.content}>
@@ -52,6 +53,7 @@ const History = () => {
               key={i}
               item={item}
               disableAction
+              handleFetchData={handleFetchData}
             />
           )
         })}

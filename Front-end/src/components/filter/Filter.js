@@ -4,7 +4,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import styles from './Filter.module.scss'
 import Select from '../select'
 import moment from 'moment'
-const Filter = ({ listTodo, setListTodoSearch }) => {
+const Filter = ({ listTodo, setListTodoSearch, historyPage }) => {
 
     const [valueInput, setValueInput] = React.useState('')
 
@@ -26,7 +26,7 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
     }
 
     const setSelected = (e) => {
-        if (e.target.value === 3) {
+        if (e.target.value === 4) {
             setListTodoSearch(listTodo)
         } else {
             let copyArr = [...listTodo]
@@ -41,6 +41,7 @@ const Filter = ({ listTodo, setListTodoSearch }) => {
                 <FilterAltIcon />
                 <Select
                     setSelected={setSelected}
+                    historyPage={historyPage ? true : false}
                 />
             </div>
             <div className={styles.search}>
