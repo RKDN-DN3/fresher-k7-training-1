@@ -5,10 +5,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import MenuUser from "../../MenuUser";
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 
 const pages = [
   { title: "Home", path: "/" },
@@ -26,7 +26,7 @@ const Header = () => {
     <AppBar position="static" className={styles.container}>
       <Container maxWidth="md">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <PlaylistAddCheckIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Link to="/">
             <Typography
               variant="h6"

@@ -41,23 +41,29 @@ export default function DialogModal(props) {
         if (!endTime || !title || !des) {
             alert('You missing parameter')
         } else {
-            if (typeof (setDataForm) === "function") {
-                const object = {
-                    title,
-                    description: des,
-                    endDate: proposedDate,
-                    startDate: startTime
-                }
-                if (item && item.id) {
-                    setDataForm({
-                        ...object,
-                        id: item.id,
-                        status: item.status
-                    })
-                } else {
-                    setDataForm(object)
+            if(endTime.getTime() <= startTime.getTime()) {
+                alert('Error: Start date is greater than end date')
+            } else {
+                if (typeof (setDataForm) === "function") {
+                    console.log(localTime === new Date())
+                    const object = {
+                        title,
+                        description: des,
+                        endDate: proposedDate,
+                        startDate: startTime
+                    }
+                    if (item && item.id) {
+                        setDataForm({
+                            ...object,
+                            id: item.id,
+                            status: item.status
+                        })
+                    } else {
+                        setDataForm(object)
+                    }
                 }
             }
+            
         }
 
     }
