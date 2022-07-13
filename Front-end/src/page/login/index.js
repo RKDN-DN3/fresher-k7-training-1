@@ -85,9 +85,9 @@ function Login() {
           if (res.data.token) {
             localStorage.setItem("tokenUserLogin", res.data.token);
             localStorage.setItem("isLogin", true);
-            localStorage.setItem("userName", values.username);
-            window.location.reload();
+            localStorage.setItem("userName", values.username)
             navigate("/");
+            window.location.reload();
             setOpenLoading(false);
           }
         })
