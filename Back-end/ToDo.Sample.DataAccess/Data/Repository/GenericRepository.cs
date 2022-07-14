@@ -21,21 +21,11 @@ namespace ToDo.Sample.DataAccess.Data.Repository
             await dbSet.AddAsync(entity);
         }
 
-        public async Task AddRange(IEnumerable<T> entities)
-        {
-            await dbSet.AddRangeAsync(entities);
-        }
-
         public async Task Delete(int id)
         {
             var entity = await dbSet.FindAsync(id);
             dbSet.Remove(entity);
             await Task.CompletedTask;
-        }
-
-        public async Task DeleteRange(IEnumerable<T> entities)
-        {
-            dbSet.RemoveRange(entities);
         }
 
         public async Task<T> Get(Expression<Func<T, bool>> filter
