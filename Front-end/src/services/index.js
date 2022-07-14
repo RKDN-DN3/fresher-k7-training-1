@@ -24,6 +24,13 @@ const registerUser = (userRegister) => {
   return axiosClient.post('/api/user/Register',userRegister);
 }
 
+const getUser= (token) => {
+  return axiosClient.get('/api/profile/get-user', { headers: { "Authorization": `Bearer ${token}` } })
+}
+
+const editUser = (data, token) => {
+  return axiosClient.put('/api/profile/update-user', data, { headers: { "Authorization": `Bearer ${token}` } })
+}
 
 export {
   getAllItem,
@@ -31,5 +38,7 @@ export {
   loginUser,
   deleteItem,
   editItem,
-  registerUser
+  registerUser,
+  getUser,
+  editUser
 }
