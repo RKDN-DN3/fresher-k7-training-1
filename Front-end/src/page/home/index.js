@@ -53,6 +53,7 @@ const Home = () => {
       setOpen(false);
       toast.success("Your was create success!")
       setOpenLoading(false)
+      return true
     } else {
       toast.error("Was an err!")
     }

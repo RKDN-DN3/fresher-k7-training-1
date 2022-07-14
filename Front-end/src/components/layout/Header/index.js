@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import { NavLink, Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import MenuUser from "../../MenuUser";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
@@ -129,11 +129,14 @@ const Header = () => {
           >
             {isLogin === "true" &&
               pages.map((item, i) => (
-                <Link to={item.path} key={i}>
-                  <Button style={{ my: 2, color: "white", display: "block" }}>
+                <NavLink to={item.path} key={i}>
+                  <Button
+                    className={styles.btnLink}
+                    style={{ my: 2, color: "white", display: "block" }}
+                  >
                     {item.title}
                   </Button>
-                </Link>
+                </NavLink>
               ))}
           </Box>
           <Box
