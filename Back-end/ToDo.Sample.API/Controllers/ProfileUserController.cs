@@ -17,10 +17,17 @@ namespace ToDo.Sample.API.Controllers
             _profileUserServices = profileUserServices;
         }
 
-        [HttpGet("getuser")]
+        [HttpGet("get-user")]
         public async Task<IActionResult> GetUser()
         {
             var result = await _profileUserServices.GetUser();
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
+        }
+        [HttpPut("update-user")]
+        public async Task<IActionResult> UpdateUser(UpdateUserDto user)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
+            var result = await _profileUserServices.UpdateUser(user);
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
     }

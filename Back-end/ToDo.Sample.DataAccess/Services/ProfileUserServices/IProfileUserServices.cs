@@ -9,6 +9,7 @@ namespace ToDo.Sample.DataAccess.Services.ProfileUserServices
 {
     public interface IProfileUserServices
     {
-        Task<ResponseDatas<UserForProfileDto>> GetUser();
+        Task<ResponseDto> GetUser();
+        Task<ResponseDto> UpdateUser(UpdateUserDto user);
     }
 }
