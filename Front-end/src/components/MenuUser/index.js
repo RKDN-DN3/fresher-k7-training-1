@@ -5,11 +5,14 @@ import Menu from '@mui/material/Menu';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
+import Information from '../Information';
 
 const MenuUser = () => {
     const isLogin = localStorage.getItem("isLogin");
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [openInfoDialog, setOpenInfoDialog] = React.useState(false);
     const navigate = useNavigate();
+
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -26,6 +29,12 @@ const MenuUser = () => {
         navigate("/");
         window.location.reload();
     }
+
+    const handleClickShowInfo = () => {
+        setOpenInfoDialog(true)
+        setAnchorEl(null);
+    }
+
     return (
         <div>
             {true && (
@@ -59,6 +68,11 @@ const MenuUser = () => {
                                 >Register</Link>
                             </MenuItem>
                         }
+                        {isLogin &&
+                            <MenuItem onClick={handleClickShowInfo}>
+                                Information
+                            </MenuItem>
+                        }
                         {!isLogin ?
                             <MenuItem onClick={handleClose}>
                                 <Link
@@ -75,6 +89,10 @@ const MenuUser = () => {
                     </Menu>
                 </div>
             )}
+            <Information
+                open={openInfoDialog}
+                setOpen={setOpenInfoDialog}
+            />
         </div>
     )
 }
