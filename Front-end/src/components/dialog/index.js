@@ -68,7 +68,7 @@ export default function DialogModal(props) {
         return isValid
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const formatEndTime = moment(endTime).format('YYYY-MM-DD');
         const covertStringEndTime = formatEndTime + "T00:00:00.000Z";
         const formatStartTime = moment(startTime).format('YYYY-MM-DD');
@@ -89,8 +89,15 @@ export default function DialogModal(props) {
                         id: item.id,
                         status: item.status
                     })
+
                 } else {
-                    setDataForm(object)
+                    const isSubmit = await setDataForm(object)
+                    if (isSubmit) {
+                        setTitle('')
+                        setDes('')
+                        setStartTime(new Date())
+                        setEndTime(null)
+                    }
                 }
             }
 
@@ -130,8 +137,7 @@ export default function DialogModal(props) {
                     </span>
                     <TextareaAutosize
                         className={styles.area}
-                        aria-label="empty textarea"
-                        placeholder="Empty"
+                        placeholder="Description"
                         value={des}
                         onChange={(e) => setDes(e.target.value)}
                     />
