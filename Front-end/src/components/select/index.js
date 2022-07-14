@@ -3,11 +3,11 @@ import { MenuItem, Select as SelectNonOutline } from '@mui/material'
 import styles from './Select.module.scss';
 
 let options = [
-    { title: 'All', value: 4 },
     { title: 'Unexecuted ', value: 0, home: true },
     { title: 'Done', value: 1, home: true },
+    { title: 'Already done', value: 2 },
     { title: 'Out date', value: 3 },
-    { title: 'Already done', value: 2 }
+    { title: 'All', value: 4 },
 ]
 
 const Select = (props) => {
@@ -15,7 +15,7 @@ const Select = (props) => {
 
     return (
         <SelectNonOutline
-            value={'selected'}
+            value={1}
             className={styles.select}
             renderValue={() => "Quick filters"}
             onChange={setSelected}
