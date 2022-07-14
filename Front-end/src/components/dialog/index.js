@@ -28,6 +28,9 @@ export default function DialogModal(props) {
         if (item) {
             setTitle(item.title)
             setDes(item.description)
+            if (item.startDate) {
+                setStartTime(moment(item.startDate).format())
+            }
             if (item.endDate) {
                 setEndTime(moment(item.endDate).format())
             }
@@ -59,16 +62,17 @@ export default function DialogModal(props) {
         }
         if (dateErr === 'invalidDate') {
             isValid = true
-            inputsError.dateErr = 'Date invalid date'
+            inputsError.dateErr = 'Date invalid'
         }
         setErrors(inputsError)
         return isValid
     }
 
-
     const handleSubmit = () => {
-        const localTime = moment(endTime).format('YYYY-MM-DD');
-        const proposedDate = localTime + "T00:00:00.000Z";
+        const formatEndTime = moment(endTime).format('YYYY-MM-DD');
+        const covertStringEndTime = formatEndTime + "T00:00:00.000Z";
+        const formatStartTime = moment(startTime).format('YYYY-MM-DD');
+        const covertStringStartTime = formatStartTime + "T00:00:00.000Z";
         if (handleValidate()) {
             return
         } else {
@@ -76,8 +80,8 @@ export default function DialogModal(props) {
                 const object = {
                     title,
                     description: des,
-                    endDate: proposedDate,
-                    startDate: startTime
+                    endDate: covertStringEndTime,
+                    startDate: covertStringStartTime
                 }
                 if (item && item.id) {
                     setDataForm({
