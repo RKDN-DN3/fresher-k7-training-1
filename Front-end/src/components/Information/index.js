@@ -131,6 +131,8 @@ export default function Information(props) {
                   className={styles.inputEdit}
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
+                  type='number'
+                  maxLength={10}
                 />
                 :
                 <>{user?.phoneNumber}</>
