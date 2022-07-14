@@ -150,10 +150,7 @@ function Login() {
 
           <FormControl fullWidth sx={{m:1}}>
             <p style={{"marginLeft":"auto"}}>
-              Not a member? 
-              <Link to="/register" style={{ color: "#000", fontWeight: 600 }}>
-                Sign up now
-              </Link>
+              Not a member? <Link to="/register" style={{ color: "#000", fontWeight: 600 }}> Sign up now</Link>
             </p>
           </FormControl>
         </form>
