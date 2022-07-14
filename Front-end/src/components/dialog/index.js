@@ -21,12 +21,16 @@ export default function DialogModal(props) {
     const [startTime, setStartTime] = React.useState(new Date());
     const [title, setTitle] = React.useState('');
     const [des, setDes] = React.useState('');
+    const [dateErr, setDateErr] = React.useState('');
     const [errors, setErrors] = React.useState({});
 
     React.useEffect(() => {
         if (item) {
             setTitle(item.title)
             setDes(item.description)
+            if (item.startDate) {
+                setStartTime(moment(item.startDate).format())
+            }
             if (item.endDate) {
                 setEndTime(moment(item.endDate).format())
             }
@@ -56,42 +60,44 @@ export default function DialogModal(props) {
             isValid = true
             inputsError.title = 'Missing title'
         }
+        if (dateErr === 'invalidDate') {
+            isValid = true
+            inputsError.dateErr = 'Date invalid'
+        }
         setErrors(inputsError)
         return isValid
     }
 
     const handleSubmit = () => {
-        const localTime = moment(endTime).format('YYYY-MM-DD');
-        const proposedDate = localTime + "T00:00:00.000Z";
+        const formatEndTime = moment(endTime).format('YYYY-MM-DD');
+        const covertStringEndTime = formatEndTime + "T00:00:00.000Z";
+        const formatStartTime = moment(startTime).format('YYYY-MM-DD');
+        const covertStringStartTime = formatStartTime + "T00:00:00.000Z";
         if (handleValidate()) {
             return
         } else {
-            if (endTime.getTime() <= startTime.getTime()) {
-                alert('Error: Start date is greater than end date')
-            } else {
-                if (typeof (setDataForm) === "function") {
-                    console.log(localTime === new Date())
-                    const object = {
-                        title,
-                        description: des,
-                        endDate: proposedDate,
-                        startDate: startTime
-                    }
-                    if (item && item.id) {
-                        setDataForm({
-                            ...object,
-                            id: item.id,
-                            status: item.status
-                        })
-                    } else {
-                        setDataForm(object)
-                    }
+            if (typeof (setDataForm) === "function") {
+                const object = {
+                    title,
+                    description: des,
+                    endDate: covertStringEndTime,
+                    startDate: covertStringStartTime
+                }
+                if (item && item.id) {
+                    setDataForm({
+                        ...object,
+                        id: item.id,
+                        status: item.status
+                    })
+                } else {
+                    setDataForm(object)
                 }
             }
 
         }
 
     }
+
     return (
         <Dialog
             open={open}
@@ -144,6 +150,7 @@ export default function DialogModal(props) {
                             onChange={(newValue) => {
                                 setStartTime(newValue);
                             }}
+                            onError={(err) => setDateErr(err)}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
@@ -159,6 +166,7 @@ export default function DialogModal(props) {
                             onChange={(newValue) => {
                                 setEndTime(newValue);
                             }}
+                            onError={(err) => setDateErr(err)}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
