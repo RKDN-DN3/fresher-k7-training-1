@@ -15,7 +15,7 @@ const Select = (props) => {
 
     return (
         <SelectNonOutline
-            value={1}
+            value={5}
             className={styles.select}
             renderValue={() => "Quick filters"}
             onChange={setSelected}
