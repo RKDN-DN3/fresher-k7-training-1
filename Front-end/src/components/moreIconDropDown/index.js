@@ -5,7 +5,8 @@ import styles from './MoreIconDropDown.module.scss'
 const MoreIconDropDown = (props) => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { id, onClick, onClickEdit, disableEdit } = props;
+    const { id, onClickDelete, onClickEdit, disableEdit } = props;
+    const open = Boolean(anchorEl);
 
     const handleClick = event => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -15,10 +16,15 @@ const MoreIconDropDown = (props) => {
         setAnchorEl(false);
     };
 
-    const open = Boolean(anchorEl);
+    const handleClickAction = async () => {
+        const isDelete = await onClickDelete()
+        if(isDelete) setAnchorEl(false)
+    }
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
+        <ClickAwayListener
+            onClickAway={handleClickAway}
+        >
             <div className={styles.container}>
                 <MoreVertIcon onClick={handleClick} />
                 <Popper
@@ -39,7 +45,7 @@ const MoreIconDropDown = (props) => {
 
                         }
                         <MenuItem
-                            onClick={onClick}
+                            onClick={handleClickAction}
                             className={styles.itemDelete}
                         >
                             <Typography>Remove</Typography>

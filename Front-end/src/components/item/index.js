@@ -45,7 +45,7 @@ const Item = (props) => {
       setOpenLoading(false)
       props.handleFetchData()
       toast.success("Your was delete success!")
-      console.log('done')
+      return true
     } else {
       toast.error("Was an err!")
     }
@@ -158,7 +158,7 @@ const Item = (props) => {
         </div>
         <div className={styles.right}>
           <MoreIconDropDown
-            onClick={handleDeleteItem}
+            onClickDelete={handleDeleteItem}
             onClickEdit={handleEditItem}
             disableEdit={
               item.status === 3
