@@ -22,7 +22,7 @@
   color: #c3b5cd;
   padding: 10px 0;
   //aa
-  width: 750px; 
+  width: 750px;
   line-break: auto;
 }
 .right {
@@ -75,5 +75,50 @@
   opacity: 0.4;
   &:hover {
     border-color: transparent !important;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .left {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .left {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .left {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .left {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .left {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .left {
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 320px), (max-width: 280px) {
+  .date {
+    display: block;
+  }
+  .left {
+    width: 200px;
   }
 }

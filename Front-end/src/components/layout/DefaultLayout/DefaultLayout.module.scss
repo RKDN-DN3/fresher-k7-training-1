@@ -23,7 +23,20 @@
 
 @media screen and (max-width: 480px) {
   .content {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .content {
+    padding: 10px 15px;
     width: 400px;
+  }
+}
+
+@media screen and(max-width: 380px) {
+  .content {
+    width: 380px;
   }
 }
 
