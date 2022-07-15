@@ -78,7 +78,7 @@ const Item = (props) => {
                 itemData.status = CONSTANTS.PROCESS;
                 break;
             case CONSTANTS.PROCESS:
-                itemData.status = CONSTANTS.DONE;
+                itemData.status = CONSTANTS.OPEN;
                 break;
             default:
                 break;
