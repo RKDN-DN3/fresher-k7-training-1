@@ -80,8 +80,10 @@ export default function DialogModal(props) {
                 isValid = false;
             }
         } else {
-            if (endTime.getTime() < startTime.getTime()) {
-                isValid = false;
+            if (endTime) {
+                if (endTime.getTime() < startTime.getTime()) {
+                    isValid = false;
+                }
             }
         }
         return isValid;
