@@ -1,14 +1,14 @@
-import React from 'react'
-import { MenuItem, Select as SelectNonOutline } from '@mui/material'
+import React from 'react';
+import { MenuItem, Select as SelectNonOutline } from '@mui/material';
 import styles from './Select.module.scss';
-
+import { CONSTANTS } from '../../constant';
 let options = [
-    { title: 'Unexecuted ', value: 0, home: true },
-    { title: 'Done', value: 1, home: true },
-    { title: 'Already done', value: 2 },
-    { title: 'Out date', value: 3 },
-    { title: 'All', value: 4 },
-]
+    { title: 'Unexecuted ', value: CONSTANTS.OPEN, home: true },
+    { title: 'Done', value: CONSTANTS.PROCESS, home: true },
+    { title: 'Already done', value: CONSTANTS.DONE },
+    { title: 'Out date', value: CONSTANTS.OUTDATE },
+    { title: 'All', value: CONSTANTS.ALL },
+];
 
 const Select = (props) => {
     const { setSelected } = props;
@@ -17,19 +17,18 @@ const Select = (props) => {
         <SelectNonOutline
             value={5}
             className={styles.select}
-            renderValue={() => "Quick filters"}
+            renderValue={() => 'Quick filters'}
             onChange={setSelected}
         >
             {options?.map((item, i) => {
                 return (
-                    <MenuItem
-                        key={i}
-                        value={item.value}
-                    >{item.title}</MenuItem>
-                )
+                    <MenuItem key={i} value={item.value}>
+                        {item.title}
+                    </MenuItem>
+                );
             })}
         </SelectNonOutline>
-    )
-}
+    );
+};
 
-export default Select
+export default Select;
