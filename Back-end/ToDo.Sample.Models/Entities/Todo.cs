@@ -10,7 +10,7 @@ namespace ToDo.Sample.Models.Entities
         [MaxLength(100)]
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public int Status { get; set; } = 0;
+        public string Status { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         [Required]
@@ -22,5 +22,7 @@ namespace ToDo.Sample.Models.Entities
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApiUser ApiUser { get; set; }
+        public bool IsDeleted { get; set; } 
+
     }
 }

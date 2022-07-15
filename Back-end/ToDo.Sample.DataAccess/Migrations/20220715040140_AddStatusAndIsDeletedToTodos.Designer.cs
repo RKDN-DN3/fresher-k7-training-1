@@ -12,8 +12,8 @@ using ToDo.Sample.DataAccess.Data;
 namespace ToDo.Sample.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220711154642_AddColumnStatusToTodos")]
-    partial class AddColumnStatusToTodos
+    [Migration("20220715040140_AddStatusAndIsDeletedToTodos")]
+    partial class AddStatusAndIsDeletedToTodos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,11 +178,15 @@ namespace ToDo.Sample.DataAccess.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()

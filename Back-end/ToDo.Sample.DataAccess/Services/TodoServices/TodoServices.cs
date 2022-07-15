@@ -33,12 +33,12 @@ namespace ToDo.Sample.DataAccess.Services.TodoServices
                 var currentUserId = _claimUserServices.GetCurrentUserId();
                 var todoToDb = _mapper.Map<Todo>(model);
 
+                todoToDb.Status = "Open";
                 todoToDb.UpdatedBy = currentUserId;
                 todoToDb.CreatedBy = currentUserId;
                 todoToDb.CreatedAt = DateTime.Now;
                 todoToDb.UpdatedAt = DateTime.Now;
                 todoToDb.UserId = currentUserId;
-
                 await _unitOfWork.Todos.Add(todoToDb);
                 await _unitOfWork.SaveChangeAsync();
                 
@@ -57,15 +57,15 @@ namespace ToDo.Sample.DataAccess.Services.TodoServices
         {
             try
             {
-                var todoToDb = await _unitOfWork.Todos.Get(c => c.Id == idTodo);
-                if (todoToDb == null)
+                var todoInDb = await _unitOfWork.Todos.Get(c => c.Id == idTodo);
+                if (todoInDb == null)
                 {
                     _responseDto.IsSuccess = false;
                     _responseDto.ErrorMessages = "Event not exist in system";
                     return _responseDto;
                 }
-
-                await _unitOfWork.Todos.Delete(idTodo);
+                todoInDb.IsDeleted = true;
+                await _unitOfWork.Todos.Update(todoInDb);
                 await _unitOfWork.SaveChangeAsync();
             }
             catch (Exception ex)
@@ -83,7 +83,17 @@ namespace ToDo.Sample.DataAccess.Services.TodoServices
                 var currentUserId = _claimUserServices.GetCurrentUserId();
 
                 var todos = await _unitOfWork.Todos.GetAll(c => c.UserId == currentUserId);
-                _responseDto.Result = _mapper.Map<IEnumerable<TodoDto>>(todos);
+                _responseDto.Result = _mapper.Map<IEnumerable<Todo>>(todos).AsEnumerable()
+                .Where(c => c.IsDeleted == false)
+                .Select(c => new TodoDto()
+                 {
+                     Id = c.Id,
+                     Title = c.Title,
+                     Description = c.Description,
+                     Status = c.Status,
+                     StartDate = (DateTime)c.StartDate,
+                     EndDate = (DateTime)c.EndDate
+                 }).ToList();
             }
             catch (Exception ex)
             {
