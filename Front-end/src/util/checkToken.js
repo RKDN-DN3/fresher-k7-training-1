@@ -1,8 +1,12 @@
-import jwtDecode from "jwt-decode";
+import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 
-export const checkTokenExpirationMiddleware = () =>  {
-    const data = localStorage.getItem("tokenUserLogin")
-    if (jwtDecode(data).exp < Date.now() / 1000) {
-        localStorage.clear();
+export const checkTokenExpirationMiddleware = () => {
+    const getCookies = Cookies.get('user') ? Cookies.get('user') : null;
+    if (getCookies) {
+        const date = jwtDecode(JSON.parse(getCookies).accessToken);
+        if (date.exp < Date.now() / 1000) {
+            Cookies.remove('user');
+        }
     }
 };

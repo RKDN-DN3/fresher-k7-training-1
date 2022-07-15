@@ -11,9 +11,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import moment from 'moment';
 import CloseIcon from '@mui/icons-material/Close';
-import styles from './DialogModal.module.scss'
+import styles from './DialogModal.module.scss';
 import FormError from '../formError';
-
 
 export default function DialogModal(props) {
     const { open, setOpen, setDataForm, item } = props;
@@ -26,13 +25,13 @@ export default function DialogModal(props) {
 
     React.useEffect(() => {
         if (item) {
-            setTitle(item.title)
-            setDes(item.description)
+            setTitle(item.title);
+            setDes(item.description);
             if (item.startDate) {
-                setStartTime(moment(item.startDate).format())
+                setStartTime(moment(item.startDate).format());
             }
             if (item.endDate) {
-                setEndTime(moment(item.endDate).format())
+                setEndTime(moment(item.endDate).format());
             }
         }
     }, [item]);
@@ -43,74 +42,85 @@ export default function DialogModal(props) {
 
     const handleValidate = () => {
         let isValid = false;
-        let inputsError = {}
+        let inputsError = {};
         if (!endTime) {
-            isValid = true
-            inputsError.endTime = 'Missing end Date'
+            isValid = true;
+            inputsError.endTime = 'Missing end Date';
         }
         if (!startTime) {
-            isValid = true
-            inputsError.startTime = 'Missing start Date'
+            isValid = true;
+            inputsError.startTime = 'Missing start Date';
         }
         if (!des) {
-            isValid = true
-            inputsError.des = 'Missing description'
+            isValid = true;
+            inputsError.des = 'Missing description';
         }
         if (!title) {
-            isValid = true
-            inputsError.title = 'Missing title'
+            isValid = true;
+            inputsError.title = 'Missing title';
         }
-        if (dateErr === 'invalidDate') {
-            isValid = true
-            inputsError.dateErr = 'Date invalid'
+        if (dateErr === 'invalidDate' || dateErr === 'minDate') {
+            isValid = true;
+            inputsError.dateErr = 'Date invalid';
         }
-        setErrors(inputsError)
-        return isValid
-    }
+        if (!handCheckDate()) {
+            isValid = true;
+            inputsError.dateErr = 'Date invalid';
+        }
+        setErrors(inputsError);
+        return isValid;
+    };
+
+    const handCheckDate = () => {
+        let isValid = true;
+        if (item && item.id) {
+            if (new Date(item.endDate).getTime() < new Date(item.startDate).getTime()) {
+                isValid = false;
+            }
+        } else {
+            if (endTime.getTime() < startTime.getTime()) {
+                isValid = false;
+            }
+        }
+        return isValid;
+    };
 
     const handleSubmit = async () => {
         const formatEndTime = moment(endTime).format('YYYY-MM-DD');
-        const covertStringEndTime = formatEndTime + "T00:00:00.000Z";
+        const covertStringEndTime = formatEndTime + 'T00:00:00.000Z';
         const formatStartTime = moment(startTime).format('YYYY-MM-DD');
-        const covertStringStartTime = formatStartTime + "T00:00:00.000Z";
+        const covertStringStartTime = formatStartTime + 'T00:00:00.000Z';
         if (handleValidate()) {
-            return
+            return;
         } else {
-            if (typeof (setDataForm) === "function") {
+            if (typeof setDataForm === 'function') {
                 const object = {
-                    title,
-                    description: des,
+                    title: title.trim(),
+                    description: des.trim(),
                     endDate: covertStringEndTime,
-                    startDate: covertStringStartTime
-                }
+                    startDate: covertStringStartTime,
+                };
                 if (item && item.id) {
                     setDataForm({
                         ...object,
                         id: item.id,
-                        status: item.status
-                    })
-
+                        status: item.status,
+                    });
                 } else {
-                    const isSubmit = await setDataForm(object)
+                    const isSubmit = await setDataForm(object);
                     if (isSubmit) {
-                        setTitle('')
-                        setDes('')
-                        setStartTime(new Date())
-                        setEndTime(null)
+                        setTitle('');
+                        setDes('');
+                        setStartTime(new Date());
+                        setEndTime(null);
                     }
                 }
             }
-
         }
-
-    }
+    };
 
     return (
-        <Dialog
-            open={open}
-            onClose={handleClose}
-            className={styles.Dialog}
-        >
+        <Dialog open={open} onClose={handleClose} className={styles.Dialog}>
             <DialogTitle className={styles.DialogTitle}>
                 <span>Make a todo for the new day</span>
                 <CloseIcon onClick={handleClose} />
@@ -179,16 +189,10 @@ export default function DialogModal(props) {
                 </div>
             </DialogContent>
             <DialogActions className={styles.DialogActions}>
-                <Button
-                    onClick={handleClose}
-                    variant="outlined"
-                >
+                <Button onClick={handleClose} variant="outlined">
                     Cancel
                 </Button>
-                <Button
-                    onClick={handleSubmit}
-                    variant="contained"
-                >
+                <Button onClick={handleSubmit} variant="contained">
                     Submit
                 </Button>
             </DialogActions>

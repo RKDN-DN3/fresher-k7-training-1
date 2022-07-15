@@ -1,25 +1,36 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: {
-    isLogin: false
-  }
+    todo: {
+        listTodo: [],
+        isFetching: false,
+        error: true,
+    },
 };
 
-export const reduxSlice = createSlice({
-  name: "todo",
-  initialState,
-  reducers: {
-    getAllItemRedux: async (state, action) => {
-      state.user = action.payload
-    }
-  }
+export const authSlice = createSlice({
+    name: 'auth',
+    initialState,
+    reducers: {
+        getTodoStart: (state) => {
+            state.todo.isFetching = true;
+        },
+        getTodoSuccess: (state, action) => {
+            state.todo.isFetching = false;
+            state.todo.listTodo = action.payload;
+            state.todo.error = false;
+        },
+        getTodoFailed: (state) => {
+            state.todo.isFetching = false;
+            state.todo.error = true;
+        },
+    },
 });
 
-export const { getAllItemRedux } = reduxSlice.actions;
+export const { getTodoStart, getTodoSuccess, getTodoFailed } = authSlice.actions;
 
-export const selectDataRedux = state => {
-  return state.todo.data;
-}
+export const todoRedux = (state) => {
+    return state.todos.todo.listTodo;
+};
 
-export default reduxSlice.reducer;
+export default authSlice.reducer;
