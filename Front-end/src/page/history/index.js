@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { tokenRedux } from '../../store/authSlice';
 import { todoRedux } from '../../store/todoSlice';
 import { getTodoAction } from '../../store/apiRequest';
-
+import { CONSTANTS } from '../../constant';
 const History = () => {
     const [listTodoSearch, setListTodoSearch] = React.useState([]);
     const token = useSelector(tokenRedux);
@@ -22,7 +22,8 @@ const History = () => {
 
     React.useEffect(() => {
         const data = [...todos];
-        setListTodoSearch(data.reverse());
+        const arr = data.filter((item) => item.status === CONSTANTS.DONE);
+        setListTodoSearch(arr.reverse());
     }, [todos]);
 
     return (

@@ -24,11 +24,11 @@ const Item = (props) => {
     const { item } = props;
 
     React.useEffect(() => {
-        if (item.status !== 3) {
+        if (item.status !== CONSTANTS.OUTDATE) {
             const fetchItemOutDate = async () => {
                 const itemOutDate = await checkDateToDoOutDate(item);
                 let data = { ...itemOutDate };
-                data.status = 3;
+                data.status = CONSTANTS.OUTDATE;
                 const res = await editItem(data, token);
                 if (res && res.status === CONSTANTS.STATUS200) {
                     toast.warning('Was todo out date!');
@@ -74,11 +74,11 @@ const Item = (props) => {
         setOpenIconLoading(true);
         const itemData = { ...item };
         switch (itemData.status) {
-            case 0:
-                itemData.status = 1;
+            case CONSTANTS.OPEN:
+                itemData.status = CONSTANTS.PROCESS;
                 break;
-            case 1:
-                itemData.status = 0;
+            case CONSTANTS.PROCESS:
+                itemData.status = CONSTANTS.DONE;
                 break;
             default:
                 break;
@@ -95,7 +95,7 @@ const Item = (props) => {
     const handleRemoveItemOutHome = async () => {
         setOpenIconLoading(true);
         const itemData = { ...item };
-        itemData.status = 2;
+        itemData.status = CONSTANTS.DONE;
         const res = await editItem(itemData, token);
         if (res && res.status === CONSTANTS.STATUS200) {
             setOpenIconLoading(false);
@@ -108,7 +108,7 @@ const Item = (props) => {
 
     return (
         <>
-            <div className={clsx(styles.item, item.status === 3 && styles.outDate)}>
+            <div className={clsx(styles.item, item.status === CONSTANTS.OUTDATE && styles.outDate)}>
                 <div className={styles.left}>
                     <div className={styles.mid}>
                         <div className={styles.title}>{item.title}</div>
@@ -128,13 +128,13 @@ const Item = (props) => {
                     <MoreIconDropDown
                         onClickDelete={handleDeleteItem}
                         onClickEdit={handleEditItem}
-                        disableEdit={item.status === 3 || item.status === 2}
+                        disableEdit={item.status === CONSTANTS.OUTDATE || item.status === CONSTANTS.DONE}
                     />
-                    {props.disableAction === true || item.status === 3 ? (
+                    {props.disableAction === true || item.status === CONSTANTS.OUTDATE ? (
                         ''
                     ) : (
                         <div className={styles.actions}>
-                            {item.status === 1 && (
+                            {item.status === CONSTANTS.PROCESS && (
                                 <ButtonIconLoading
                                     variant="contained"
                                     className={styles.btnRemove}
@@ -143,11 +143,11 @@ const Item = (props) => {
                                     add to history
                                 </ButtonIconLoading>
                             )}
-                            {item.status === 1 ? (
+                            {item.status === CONSTANTS.PROCESS ? (
                                 <ButtonIconLoading
                                     openIconLoading={openIconLoading}
                                     variant="contained"
-                                    className={item.status === 1 ? styles.btnDone : styles.btnCheck}
+                                    className={item.status === CONSTANTS.PROCESS ? styles.btnDone : styles.btnCheck}
                                     onClick={handleStatusItem}
                                 >
                                     <AutorenewIcon />
@@ -156,7 +156,7 @@ const Item = (props) => {
                                 <ButtonIconLoading
                                     openIconLoading={openIconLoading}
                                     variant="contained"
-                                    className={item.status === 1 ? styles.btnDone : styles.btnCheck}
+                                    className={item.status === CONSTANTS.PROCESS ? styles.btnDone : styles.btnCheck}
                                     onClick={handleStatusItem}
                                 >
                                     <CheckIcon />

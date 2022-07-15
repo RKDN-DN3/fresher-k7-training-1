@@ -32,7 +32,8 @@ const Home = () => {
 
     React.useEffect(() => {
         const data = [...todos];
-        setListTodoSearch(data.reverse());
+        const arr = data.filter((item) => item.status !== CONSTANTS.DONE);
+        setListTodoSearch(arr.reverse());
     }, [todos]);
 
     const handleClickOpen = () => {
