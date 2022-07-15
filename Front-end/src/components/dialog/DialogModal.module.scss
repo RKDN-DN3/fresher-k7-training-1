@@ -7,15 +7,15 @@
 .formInput {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 .Dialog {
   :global(.MuiPaper-root) {
-    width: 500px !important;
+    min-width: 500px !important;
   }
 }
 .area {
-  min-height: 100px !important;
+  //min-height: 100px !important;
   padding: 10px;
 }
 .DialogTitle {
@@ -34,5 +34,13 @@
 .Dialog {
   :global(.MuiPaper-root) {
     border-radius: 10px;
+  }
+}
+
+@media screen and(max-width: 480px) {
+  .Dialog {
+    :global(.MuiPaper-root) {
+      min-width: 300px !important;
+    }
   }
 }

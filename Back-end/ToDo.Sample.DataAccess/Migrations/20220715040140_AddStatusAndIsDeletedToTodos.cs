@@ -4,20 +4,31 @@
 
 namespace ToDo.Sample.DataAccess.Migrations
 {
-    public partial class AddColumnStatusToTodos : Migration
+    public partial class AddStatusAndIsDeletedToTodos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.AddColumn<bool>(
+                name: "IsDeleted",
+                table: "Todos",
+                type: "bit",
+                nullable: false,
+                defaultValue: false);
+
+            migrationBuilder.AddColumn<string>(
                 name: "Status",
                 table: "Todos",
-                type: "int",
+                type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: "");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "IsDeleted",
+                table: "Todos");
+
             migrationBuilder.DropColumn(
                 name: "Status",
                 table: "Todos");

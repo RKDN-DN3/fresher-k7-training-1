@@ -17,8 +17,8 @@ namespace ToDo.Sample.API.Controllers
             _todoServices = todoServices;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TodoCreateDto todoRequest)
+        [HttpPost("create-todo")]
+        public async Task<IActionResult> CreateTodo([FromBody] TodoCreateDto todoRequest)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _todoServices.CreateTodo(todoRequest);

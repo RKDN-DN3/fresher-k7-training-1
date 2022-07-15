@@ -1,4 +1,5 @@
 ﻿using ToDo.Sample.Models.Dto;
+using ToDo.Sample.Models.Entities;
 
 namespace ToDo.Sample.DataAccess.Services.TodoServices
 {

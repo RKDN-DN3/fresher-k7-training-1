@@ -3,22 +3,28 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { ClickAwayListener, MenuItem, Popper, Typography } from '@mui/material';
 import styles from './MoreIconDropDown.module.scss'
 const MoreIconDropDown = (props) => {
-    
+
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const { id, onClick, onClickEdit} = props;
+    const { id, onClickDelete, onClickEdit, disableEdit } = props;
+    const open = Boolean(anchorEl);
 
     const handleClick = event => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     };
-    
+
     const handleClickAway = () => {
         setAnchorEl(false);
     };
 
-    const open = Boolean(anchorEl);
+    const handleClickAction = async () => {
+        const isDelete = await onClickDelete()
+        if(isDelete) setAnchorEl(false)
+    }
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
+        <ClickAwayListener
+            onClickAway={handleClickAway}
+        >
             <div className={styles.container}>
                 <MoreVertIcon onClick={handleClick} />
                 <Popper
@@ -26,15 +32,20 @@ const MoreIconDropDown = (props) => {
                     open={open}
                     anchorEl={anchorEl}
                 >
-                    <div  className={styles.popperContent}>
+                    <div className={styles.popperContent}>
+                        {disableEdit ?
+                            ''
+                            :
+                            <MenuItem
+                                onClick={onClickEdit}
+                                className={styles.itemEdit}
+                            >
+                                <Typography>Edit</Typography>
+                            </MenuItem>
+
+                        }
                         <MenuItem
-                             onClick={onClickEdit}
-                             className={styles.itemEdit}
-                        >
-                            <Typography>Edit</Typography>
-                        </MenuItem>
-                        <MenuItem
-                            onClick={onClick}
+                            onClick={handleClickAction}
                             className={styles.itemDelete}
                         >
                             <Typography>Remove</Typography>

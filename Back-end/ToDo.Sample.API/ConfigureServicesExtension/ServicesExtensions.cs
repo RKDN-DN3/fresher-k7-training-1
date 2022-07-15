@@ -27,7 +27,7 @@ namespace ToDo.Sample.API.ConfigureServicesExtension
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PersonalApp", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoSample", Version = "v1" });
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Description = "Standard Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",

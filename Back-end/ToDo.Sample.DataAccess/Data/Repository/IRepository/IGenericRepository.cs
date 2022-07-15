@@ -18,9 +18,7 @@ namespace ToDo.Sample.DataAccess.Data.Repository.IRepository
         Task<T> Get(Expression<Func<T, bool>> filter
             , Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
         Task Add(T entity);
-        Task AddRange(IEnumerable<T> entities);
         Task Delete(int id);
-        Task DeleteRange(IEnumerable<T> entities);
         Task Update(T entity);
     }
 }

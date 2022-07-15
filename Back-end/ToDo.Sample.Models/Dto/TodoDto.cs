@@ -22,7 +22,6 @@ namespace ToDo.Sample.Models.Dto
     public class TodoDto : TodoCreateDto
     {
         public int Id { get; set; }
-        public int Status { get; set; } = 0;
-
+        public string Status { get; set; }
     }
 }
