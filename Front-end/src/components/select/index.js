@@ -3,9 +3,9 @@ import { MenuItem, Select as SelectNonOutline } from '@mui/material';
 import styles from './Select.module.scss';
 import { CONSTANTS } from '../../constant';
 let options = [
-    { title: 'Unexecuted ', value: CONSTANTS.OPEN, home: true },
-    { title: 'Done', value: CONSTANTS.PROCESS, home: true },
-    { title: 'Already done', value: CONSTANTS.DONE },
+    { title: 'Open ', value: CONSTANTS.OPEN, home: true },
+    { title: 'Process', value: CONSTANTS.PROCESS, home: true },
+    { title: 'Done', value: CONSTANTS.DONE },
     { title: 'Out date', value: CONSTANTS.OUTDATE },
     { title: 'All', value: CONSTANTS.ALL },
 ];
