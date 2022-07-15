@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { TextField } from '@mui/material';
+import { FormHelperText, TextField } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -22,6 +22,7 @@ export default function DialogModal(props) {
     const [des, setDes] = React.useState('');
     const [dateErr, setDateErr] = React.useState('');
     const [errors, setErrors] = React.useState({});
+    const [errorTop, setErrorTop] = React.useState('');
 
     React.useEffect(() => {
         if (item) {
@@ -68,6 +69,7 @@ export default function DialogModal(props) {
             inputsError.dateErr = 'Date invalid';
         }
         setErrors(inputsError);
+        setErrorTop('Submit Fail! Please check again.');
         return isValid;
     };
 
@@ -127,7 +129,7 @@ export default function DialogModal(props) {
             </DialogTitle>
             <DialogContent className={styles.form}>
                 <div className={styles.formInput}>
-                    <FormError errors={errors} />
+                    {errorTop !== '' && <FormError errors={errorTop} />}
                     <span>
                         Title
                         <span> &#x2a;</span>
@@ -136,21 +138,45 @@ export default function DialogModal(props) {
                         id="outlined-basic"
                         label="Title"
                         variant="outlined"
+                        error={errors.title !== undefined}
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
+                    {!!errors.title && (
+                        <FormHelperText error id="outlined-basic">
+                            {errors.title}
+                        </FormHelperText>
+                    )}
                 </div>
                 <div className={styles.formInput}>
                     <span>
                         Description
                         <span> &#x2a;</span>
                     </span>
-                    <TextareaAutosize
+                    <TextField
+                        id="outlined-textarea"
                         className={styles.area}
-                        placeholder="Description"
+                        label="Description"
+                        variant="outlined"
+                        multiline
+                        error={errors.des !== undefined}
                         value={des}
+                        rows={5}
                         onChange={(e) => setDes(e.target.value)}
+                        InputProps={{
+                            inputComponent: TextareaAutosize,
+                            inputProps: {
+                                style: {
+                                    resize: 'auto',
+                                },
+                            },
+                        }}
                     />
+                    {!!errors.des && (
+                        <FormHelperText error id="outlined-textarea">
+                            {errors.des}
+                        </FormHelperText>
+                    )}
                 </div>
                 <div className={styles.formInput}>
                     <span>
@@ -167,7 +193,13 @@ export default function DialogModal(props) {
                                 setStartTime(newValue);
                             }}
                             onError={(err) => setDateErr(err)}
-                            renderInput={(params) => <TextField {...params} />}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    error={errors.startTime !== undefined}
+                                    helperText={errors.startTime !== '' && errors.startTime}
+                                />
+                            )}
                         />
                     </LocalizationProvider>
                     <span>
@@ -183,7 +215,13 @@ export default function DialogModal(props) {
                                 setEndTime(newValue);
                             }}
                             onError={(err) => setDateErr(err)}
-                            renderInput={(params) => <TextField {...params} />}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    error={errors.endTime !== undefined}
+                                    helperText={errors.endTime !== '' && errors.endTime}
+                                />
+                            )}
                         />
                     </LocalizationProvider>
                 </div>

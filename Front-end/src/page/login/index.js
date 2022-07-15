@@ -1,4 +1,13 @@
-import { FormControl, InputLabel, OutlinedInput, TextField, InputAdornment, IconButton, Button } from '@mui/material';
+import {
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    TextField,
+    InputAdornment,
+    IconButton,
+    Button,
+    FormHelperText,
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React, { useState } from 'react';
@@ -20,6 +29,7 @@ function Login() {
         password: '@Abc123',
     });
     const [errors, setErrors] = useState({});
+    const [errorTop, setErrorTop] = useState('');
 
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
@@ -52,10 +62,13 @@ function Login() {
 
         if (!isSubmit) {
             setErrors(inputsError);
+            setErrorTop('Login Fail! Please check again.');
         } else {
             if (Object.keys(errors).length > 0) {
                 setErrors({});
             }
+            setErrorTop('');
+
             setValues({ ...values, username: '', password: '' });
 
             let userLogin = {
@@ -74,7 +87,7 @@ function Login() {
             <div style={{ color: 'red' }}>Demo with default user and password</div>
             <div className={styles.content}>
                 <FormControl fullWidth sx={{ m: 1 }}>
-                    <FormError errors={errors} />
+                    {errorTop !== '' && <FormError errors={errorTop} />}
                 </FormControl>
                 <form onSubmit={handleSubmit}>
                     <FormControl fullWidth sx={{ m: 1 }}>
@@ -83,6 +96,8 @@ function Login() {
                             name="username"
                             label="Username"
                             variant="outlined"
+                            error={errors.username !== undefined}
+                            helperText={errors.username !== '' && errors.username}
                             value={values.username ? values.username : ''}
                             onChange={handleOnChange('username')}
                         />
@@ -95,6 +110,7 @@ function Login() {
                             name="password"
                             label="Password"
                             variant="outlined"
+                            error={errors.password !== undefined}
                             value={values.password ? values.password : ''}
                             type={values.showPassword ? 'text' : 'password'}
                             onChange={handleOnChange('password')}
@@ -111,6 +127,11 @@ function Login() {
                                 </InputAdornment>
                             }
                         ></OutlinedInput>
+                        {!!errors.password && (
+                            <FormHelperText error id="outlined-password">
+                                {errors.password}
+                            </FormHelperText>
+                        )}
                     </FormControl>
 
                     <FormControl fullWidth sx={{ m: 1 }}>

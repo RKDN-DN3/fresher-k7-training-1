@@ -1,4 +1,10 @@
-import { Button, TextField, FormControl, Alert } from "@mui/material";
+import {
+  Button,
+  TextField,
+  FormControl,
+  Alert,
+  FormHelperText,
+} from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
@@ -19,11 +25,9 @@ const Register = () => {
     showPassword: false,
     showCPassword: false,
   });
-
   const [errors, setErrors] = useState({});
-
+  const [errorTop, setErrorTop] = useState("");
   const navigate = useNavigate();
-
   const userRegister = JSON.stringify({
     fullName: values.fullname,
     PhoneNumber: values.phone,
@@ -74,6 +78,12 @@ const Register = () => {
     }
   };
 
+  const validateUsername = (name) => {
+    if (name) {
+      return name.match(/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/);
+    }
+  };
+
   const handleSubmitRegister = (e) => {
     e.preventDefault();
     setOpenLoading(true);
@@ -86,7 +96,7 @@ const Register = () => {
       values.fullname === undefined ||
       values.fullname === ""
     ) {
-      inputsError.fullname = "Fullname không được để trống";
+      inputsError.fullname = "Missing Fullname";
       isSubmit = false;
     }
 
@@ -95,7 +105,7 @@ const Register = () => {
       values.phone === undefined ||
       values.phone === ""
     ) {
-      inputsError.phone = "Phone không được để trống";
+      inputsError.phone = "Missing Phone";
       isSubmit = false;
     }
 
@@ -104,8 +114,13 @@ const Register = () => {
       values.username === undefined ||
       values.username === ""
     ) {
-      inputsError.username = "Username không được để trống";
+      inputsError.username = "Missing Username";
       isSubmit = false;
+    } else {
+      if (!validateUsername(values.username)) {
+        inputsError.username = "Username invalid";
+        isSubmit = false;
+      }
     }
 
     if (
@@ -113,11 +128,11 @@ const Register = () => {
       values.email === undefined ||
       values.email === ""
     ) {
-      inputsError.email = "Email không được để trống";
+      inputsError.email = "Missing Email";
       isSubmit = false;
     } else {
       if (!validateEmail(values.email)) {
-        inputsError.email = "Email không đúng định dạng";
+        inputsError.email = "Email invalid";
         isSubmit = false;
       }
     }
@@ -127,12 +142,12 @@ const Register = () => {
       values.password === undefined ||
       values.password === ""
     ) {
-      inputsError.password = "Password không được để trống";
+      inputsError.password = "Missing Password";
       isSubmit = false;
     } else {
       if (!validatePassword(values.password)) {
         inputsError.password =
-          "Password phải có ít nhất 8 kí tự, ít nhất 1 chữ cái viết hoa, ít nhất 1 chữ số và ít nhất 1 ký tự đặc biệt";
+          "Password must be at least 8 characters, must be at least 1 uppercase, must be at least 1 number and must be at least 1 special character";
         isSubmit = false;
       }
     }
@@ -142,26 +157,28 @@ const Register = () => {
       values.cpassword === undefined ||
       values.cpassword === ""
     ) {
-      inputsError.cpassword = "Confirm Password không được để trống";
+      inputsError.cpassword = "Missing Confirm Password";
       isSubmit = false;
     } else {
       if (values.cpassword !== values.password) {
-        inputsError.cpassword = "Confirm Password không trùng khớp";
+        inputsError.cpassword = "Confirm Password not match Password";
         isSubmit = false;
       }
     }
 
     if (!isSubmit) {
       setErrors(inputsError);
+      setErrorTop("Register Fail! Please check again.")
       setOpenLoading(false);
     } else {
       if (Object.keys(errors).length > 0) {
         setErrors({});
       }
+      setErrorTop("")
       setValues({
         ...values,
         fullname: "",
-        phone:"",
+        phone: "",
         username: "",
         email: "",
         password: "",
@@ -170,7 +187,7 @@ const Register = () => {
       handleRegister();
     }
   };
-
+  console.log(typeof(errors.fullname))
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -178,16 +195,14 @@ const Register = () => {
       </div>
       <div className={styles.content}>
         <FormControl fullWidth sx={{ m: 1 }}>
-          <FormError errors={errors} />
-          {alertSuccess === true ? (
+          {errorTop !== "" && <FormError errors={errorTop} />}
+          {alertSuccess && (
             <Alert severity="success">
               Register Successfully —
               <strong className={styles.pointer} onClick={handleDirectLogin}>
                 Login now
               </strong>
             </Alert>
-          ) : (
-            ""
           )}
         </FormControl>
         <form onSubmit={handleSubmitRegister}>
@@ -197,6 +212,8 @@ const Register = () => {
               name="fullname"
               label="FullName"
               variant="outlined"
+              error={errors.fullname !== undefined}
+              helperText={errors.fullname !== "" && errors.fullname}
               value={values.fullname ? values.fullname : ""}
               onChange={handleOnChange("fullname")}
             />
@@ -208,6 +225,8 @@ const Register = () => {
               label="Phone"
               variant="outlined"
               type={"number"}
+              error={errors.phone !== undefined} 
+              helperText={errors.phone !== "" && errors.phone}
               value={values.phone ? values.phone : ""}
               onChange={handleOnChange("phone")}
             />
@@ -218,6 +237,8 @@ const Register = () => {
               name="username"
               label="Username"
               variant="outlined"
+              error={errors.username !== undefined}
+              helperText={errors.username !== "" && errors.username}
               value={values.username ? values.username : ""}
               onChange={handleOnChange("username")}
             />
@@ -228,6 +249,8 @@ const Register = () => {
               name="email"
               label="Email"
               variant="outlined"
+              error={errors.email !== undefined}
+              helperText={errors.email !== "" && errors.email}
               value={values.email ? values.email : ""}
               onChange={handleOnChange("email")}
             />
@@ -241,6 +264,7 @@ const Register = () => {
               name="password"
               label="Password"
               variant="outlined"
+              error={errors.password !== undefined}
               value={values.password ? values.password : ""}
               onChange={handleOnChange("password")}
               type={values.showPassword ? "text" : "password"}
@@ -257,6 +281,11 @@ const Register = () => {
                 </InputAdornment>
               }
             />
+            {!!errors.password && (
+              <FormHelperText error id="outlined-adornment-password">
+                {errors.password}
+              </FormHelperText>
+            )}
           </FormControl>
 
           <FormControl fullWidth sx={{ m: 1 }}>
@@ -268,6 +297,7 @@ const Register = () => {
               name="cpassword"
               label="Confirm Password"
               variant="outlined"
+              error={errors.cpassword !== undefined}
               value={values.cpassword ? values.cpassword : ""}
               onChange={handleOnChange("cpassword")}
               type={values.showCPassword ? "text" : "password"}
@@ -284,6 +314,11 @@ const Register = () => {
                 </InputAdornment>
               }
             />
+            {!!errors.cpassword && (
+              <FormHelperText error id="outlined-adornment-confirm-password">
+                {errors.cpassword}
+              </FormHelperText>
+            )}
           </FormControl>
           <FormControl fullWidth sx={{ m: 1 }}>
             <Button type="submit" variant="contained">
@@ -291,10 +326,14 @@ const Register = () => {
             </Button>
           </FormControl>
 
-          <FormControl fullWidth sx={{m:1}}>
-              <p style={{"margin":"0 auto"}}>
-                Have already an account? <Link to="/login" style={{"color":"#000","fontWeight":600}}> Login now</Link>
-              </p>
+          <FormControl fullWidth sx={{ m: 1 }}>
+            <p style={{ margin: "0 auto" }}>
+              Have already an account?{" "}
+              <Link to="/login" style={{ color: "#000", fontWeight: 600 }}>
+                {" "}
+                Login now
+              </Link>
+            </p>
           </FormControl>
         </form>
       </div>
