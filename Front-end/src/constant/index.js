@@ -5,4 +5,5 @@ export const CONSTANTS = {
     PROCESS: 'process',
     DONE: 'done',
     OUTDATE: 'outdate',
+    ALL: 'all',
 };
