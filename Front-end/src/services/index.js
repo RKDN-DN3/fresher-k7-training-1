@@ -3,6 +3,7 @@ import axiosClient from '../axios';
 const header = (token) => {
     return { headers: { Authorization: `Bearer ${token}` } };
 };
+
 const getAllItem = (token) => {
     return axiosClient.get('/api/todos/get-todos', header(token));
 };
