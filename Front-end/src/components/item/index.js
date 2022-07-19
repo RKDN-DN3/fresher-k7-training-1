@@ -115,7 +115,9 @@ const Item = (props) => {
                         <div className={styles.content}>{item.description}</div>
                         <div className={styles.date}>
                             <div className={styles.time}>{moment(item.startDate).format('MM/DD/YYYY')}</div>
-                            <span className={styles.space}>&#8594;</span>
+                            <span className={styles.space}>
+                                <p>&#8594;</p>
+                            </span>
                             <div className={styles.time} style={{ color: item.status === 3 && 'red' }}>
                                 {moment(item.endDate).format('MM/DD/YYYY')}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

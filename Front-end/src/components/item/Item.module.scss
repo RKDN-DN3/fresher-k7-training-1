@@ -121,4 +121,12 @@
         display: flex;
         flex-direction: column !important;
     }
+    .space {
+        p {
+            display: none !important;
+        }
+    }
+    .space::after {
+        content: ' \2193';
+    }
 }
