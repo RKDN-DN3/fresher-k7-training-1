@@ -8,3 +8,13 @@
         color: var(--color-white) !important ;
     }
 }
+@media screen and (max-width: 480px) {
+    .select {
+        :global(.MuiSelect-select) {
+            display: none !important;
+        }
+        :global(.MuiSvgIcon-root) {
+            display: none !important;
+        }
+    }
+}
