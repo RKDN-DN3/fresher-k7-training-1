@@ -40,7 +40,7 @@ const Header = () => {
                             noWrap
                             sx={{
                                 mr: 2,
-                                display: 'flex',
+                                display: { xs: 'none', md: 'flex' },
                                 alignItems: 'center',
                             }}
                         >
