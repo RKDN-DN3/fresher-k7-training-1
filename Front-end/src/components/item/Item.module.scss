@@ -20,7 +20,6 @@
     font-weight: 500;
     color: #c3b5cd;
     padding: 10px 0;
-    width: 750px;
     line-break: auto;
 }
 .right {
@@ -61,6 +60,7 @@
     background-color: #df7150 !important;
     color: white !important;
     font-size: 12px !important;
+    min-width: 120px !important;
 }
 .time {
     color: #333;
@@ -91,45 +91,34 @@
 
 @media screen and (min-width: 800px) {
     .mid {
-        width: 600px;
+        width: 400px;
     }
 }
 
 @media screen and (max-width: 768px) {
     .mid {
-        width: 500px;
+        width: 400px;
     }
 }
 
 @media screen and (max-width: 678px) {
     .mid {
-        width: 400px;
+        width: 200px;
     }
 }
 
 @media screen and (max-width: 480px) {
     .mid {
-        width: 300px;
-    }
-}
-
-@media screen and (max-width: 420px) {
-    .mid {
-        width: 300px;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    .mid {
-        width: 250px;
-    }
-}
-
-@media screen and (max-width: 320px), (max-width: 280px) {
-    .date {
-        display: block;
-    }
-    .mid {
         width: 200px;
+    }
+    .btnRemove,
+    .btnCheck,
+    .btnDone {
+        height: 40px !important;
+        min-width: 50px !important;
+    }
+    .date {
+        display: flex;
+        flex-direction: column !important;
     }
 }
