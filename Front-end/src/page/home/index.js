@@ -25,6 +25,9 @@ const Home = () => {
 
     React.useEffect(() => {
         checkTokenExpirationMiddleware();
+    }, []);
+
+    React.useEffect(() => {
         if (todos && todos.length === 0) {
             getTodoAction(token, dispatch);
         }

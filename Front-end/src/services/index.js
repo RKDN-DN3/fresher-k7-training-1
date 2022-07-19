@@ -1,21 +1,18 @@
 import axiosClient from '../axios';
 
-// const sendApi = (method, url, data, token) => {
-//     return method(url, data ? data : '', {
-//         headers: { Authorization: `Bearer ${token}` },
-//     });
-// };
-
+const header = (token) => {
+    return { headers: { Authorization: `Bearer ${token}` } };
+};
 const getAllItem = (token) => {
-    return axiosClient.get('/api/todos/get-todos', { headers: { Authorization: `Bearer ${token}` } });
+    return axiosClient.get('/api/todos/get-todos', header(token));
 };
 
 const createItem = (data, token) => {
-    return axiosClient.post('/api/todos/create-todo', data, { headers: { Authorization: `Bearer ${token}` } });
+    return axiosClient.post('/api/todos/create-todo', data, header(token));
 };
 
 const deleteItem = (id, token) => {
-    return axiosClient.delete(`api/todos/delete-todo/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    return axiosClient.delete(`api/todos/delete-todo/${id}`, header(token));
 };
 
 const loginUser = (userLogin) => {
@@ -23,7 +20,7 @@ const loginUser = (userLogin) => {
 };
 
 const editItem = (data, token) => {
-    return axiosClient.put('/api/todos/update-todo', data, { headers: { Authorization: `Bearer ${token}` } });
+    return axiosClient.put('/api/todos/update-todo', data, header(token));
 };
 
 const registerUser = (userRegister) => {
@@ -31,11 +28,11 @@ const registerUser = (userRegister) => {
 };
 
 const getUser = (token) => {
-    return axiosClient.get('/api/profile/get-user', { headers: { Authorization: `Bearer ${token}` } });
+    return axiosClient.get('/api/profile/get-user', header(token));
 };
 
 const editUser = (data, token) => {
-    return axiosClient.put('/api/profile/update-user', data, { headers: { Authorization: `Bearer ${token}` } });
+    return axiosClient.put('/api/profile/update-user', data, header(token));
 };
 
 export { getAllItem, createItem, loginUser, deleteItem, editItem, registerUser, getUser, editUser };
